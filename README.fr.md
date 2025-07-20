@@ -31,6 +31,15 @@ L'application propose :
 - ♿ **Accessibilité complète** : tabindex, aria-label, aria-live, textes alternatifs décrivant dynamiquement les images, contraste élevé, navigation clavier, descriptions dynamiques
 - 📱 **Interface responsive** : Adaptée au mobile et au bureau
 
+### 🗣️ Expérience de synthèse vocale (TTS) améliorée
+- Icône de haut-parleur animée (pulsation) pendant la lecture
+- Boutons TTS basculables : cliquez à nouveau pour arrêter, ou cliquez sur un autre pour changer
+- Un seul texte peut être lu à la fois
+- Curseurs accessibles pour la vitesse et la tonalité de la voix (enregistrés dans localStorage)
+- Accessibilité totale (ARIA, clavier, focus, contraste)
+- Message doux si aucune voix hébraïque n'est disponible, avec instructions d'installation
+- Fonctionne en hébreu, anglais et français (selon le navigateur)
+
 ---
 
 ## 🛠️ Technologies
@@ -123,6 +132,13 @@ kids-bullying/
 
 - Tous les éléments incluent tabindex, aria-label, aria-live, textes alternatifs dynamiques, contraste élevé, support RTL/LTR, navigation clavier, descriptions de graphiques, et onglets accessibles.
 - Titres hiérarchiques (h1-h3), gestion du focus, messages d'erreur avec aria-live, et accessibilité du contenu dynamique.
+
+### 🗣️ Exemple d'utilisation du TTS
+- Pour écouter une section : cliquez sur le bouton haut-parleur (🔊) en haut de chaque section.
+- Cliquez à nouveau pour arrêter, ou cliquez sur un autre pour changer.
+- Réglez la vitesse et la tonalité de la voix à l'aide des curseurs en haut de la page.
+- Les paramètres sont enregistrés automatiquement pour votre prochaine visite.
+- Si aucune voix hébraïque n'est disponible, un message doux avec des instructions d'installation s'affichera.
 
 ---
 

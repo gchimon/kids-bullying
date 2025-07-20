@@ -36,6 +36,16 @@ kids-bullying/
 - **RTL/LTR support**
 - **Keyboard navigation**
 
+### 🗣️ Text-to-Speech (TTS) Experience Upgrade (July 2024)
+- Animated speaker icon and visual feedback while speaking.
+- TTS buttons are toggleable: click again to stop, or click another to switch.
+- Only one section/advice can be read at a time.
+- Added accessible sliders for speech rate and pitch, with localStorage persistence.
+- All TTS features are fully accessible (ARIA, keyboard, focus, color contrast).
+- Hebrew voice warning: gentle, accessible message with install instructions if no Hebrew TTS is available.
+- All features work in Hebrew, English, and French (subject to browser TTS support).
+- See README for usage details.
+
 ---
 
 For full documentation, setup instructions, and theoretical background, see the README files. 

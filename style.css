@@ -191,6 +191,68 @@ body {
   background: transparent;
 }
 
+#tts-warning {
+  background: #fffbe6;
+  color: #7F9F80;
+  border: 2px solid #A7C4A8;
+  border-radius: 1em;
+  padding: 1em 1.5em;
+  margin: 1.5em auto 1em auto;
+  max-width: 600px;
+  font-size: 1.1em;
+  box-shadow: 0 2px 8px #0001;
+  text-align: center;
+  z-index: 1000;
+}
+#tts-warning a {
+  color: #0077C0;
+  text-decoration: underline;
+  font-weight: bold;
+  outline: none;
+}
+#tts-warning a:focus {
+  outline: 2px solid #0077C0;
+  outline-offset: 2px;
+}
+
+#tts-controls {
+  background: #FDFBF6;
+  border-radius: 1em;
+  padding: 1em 1.5em 0.5em 1.5em;
+  box-shadow: 0 2px 8px #0001;
+  margin-bottom: 2em;
+}
+#tts-controls label {
+  color: #0077C0;
+  font-size: 1.05em;
+}
+#tts-controls input[type=range] {
+  width: 160px;
+  accent-color: #7F9F80;
+  margin-top: 0.2em;
+  margin-bottom: 0.5em;
+}
+#tts-controls input[type=range]:focus {
+  outline: 2px solid #0077C0;
+  outline-offset: 2px;
+}
+#tts-controls span {
+  font-weight: bold;
+  color: #3C3C3C;
+}
+
+/* אייקון רמקול מונפש */
+.tts-btn.speaking {
+  animation: tts-pulse 0.7s infinite alternate;
+  color: #0077C0;
+  filter: drop-shadow(0 0 4px #7F9F80);
+}
+@keyframes tts-pulse {
+  0% { transform: scale(1) rotate(-5deg); }
+  50% { transform: scale(1.18) rotate(5deg); }
+  100% { transform: scale(1) rotate(-5deg); }
+}
+
 @media (max-width: 600px) {
     .tab-bar { flex-direction: column; gap: 0.5rem; }
     .card, .chart-container { padding: 1rem; }

@@ -31,6 +31,15 @@ The application offers:
 - ♿ **Full accessibility**: Includes tabindex, aria-label, aria-live, dynamic image alt text, high contrast, keyboard navigation, dynamic descriptions
 - 📱 **Responsive UI**: Mobile and desktop friendly
 
+### 🗣️ Enhanced Text-to-Speech (TTS) Experience
+- Animated speaker icon (pulsing) while speaking
+- TTS buttons are toggleable: click again to stop, or click another to switch
+- Only one section/advice can be read at a time
+- Accessible sliders for speech rate and pitch (saved in localStorage)
+- Full ARIA/keyboard/focus/color accessibility
+- Gentle warning if no Hebrew voice is available, with install instructions
+- Works in Hebrew, English, and French (browser support required)
+
 ---
 
 ## 🛠️ Technologies
@@ -125,6 +134,13 @@ kids-bullying/
 
 - All key elements include tabindex, aria-label, aria-live, dynamic alt text, high contrast, RTL/LTR support, keyboard navigation, graph descriptions, and accessible tabs.
 - Hierarchical headers (h1-h3), focus management, error messages with aria-live, and dynamic content accessibility.
+
+### 🗣️ TTS Usage Example
+- To listen to a section: click the speaker button (🔊) at the top of any section.
+- Click again to stop, or click another to switch.
+- Adjust speech rate and pitch using the sliders at the top of the page.
+- Settings are saved automatically for your next visit.
+- If no Hebrew voice is available, a gentle message with install instructions will appear.
 
 ---
 

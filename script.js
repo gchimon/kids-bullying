@@ -448,6 +448,214 @@ function updateLanguageUI(lang) {
 }
 
 // =====================
+// Text-to-Speech (TTS) for Sections
+// =====================
+function getBestVoice(lang) {
+  const voices = window.speechSynthesis.getVoices();
+  // Hebrew
+  if (lang === 'he-IL') {
+    return voices.find(v => v.lang === 'he-IL' && v.name.includes('Google')) ||
+           voices.find(v => v.lang === 'he-IL');
+  }
+  // French
+  if (lang === 'fr-FR') {
+    return voices.find(v => v.lang === 'fr-FR' && v.name.includes('Google')) ||
+           voices.find(v => v.lang === 'fr-FR');
+  }
+  // English
+  if (lang === 'en-US') {
+    return voices.find(v => v.lang === 'en-US' && v.name.includes('Google')) ||
+           voices.find(v => v.lang === 'en-US');
+  }
+  // fallback
+  return voices[0];
+}
+
+function getTTSLang() {
+  if (window.currentLang === 'he') return 'he-IL';
+  if (window.currentLang === 'fr') return 'fr-FR';
+  return 'en-US';
+}
+
+// =====================
+// TTS Controls (rate & pitch)
+// =====================
+let ttsRate = parseFloat(localStorage.getItem('ttsRate')) || 1.0;
+let ttsPitch = parseFloat(localStorage.getItem('ttsPitch')) || 1.0;
+const ttsRateInput = document.getElementById('tts-rate');
+const ttsPitchInput = document.getElementById('tts-pitch');
+const ttsRateValue = document.getElementById('tts-rate-value');
+const ttsPitchValue = document.getElementById('tts-pitch-value');
+if (ttsRateInput && ttsPitchInput && ttsRateValue && ttsPitchValue) {
+  ttsRateInput.value = ttsRate;
+  ttsPitchInput.value = ttsPitch;
+  ttsRateValue.textContent = ttsRate.toFixed(2);
+  ttsPitchValue.textContent = ttsPitch.toFixed(2);
+  ttsRateInput.addEventListener('input', () => {
+    ttsRate = parseFloat(ttsRateInput.value);
+    ttsRateValue.textContent = ttsRate.toFixed(2);
+    localStorage.setItem('ttsRate', ttsRate);
+  });
+  ttsPitchInput.addEventListener('input', () => {
+    ttsPitch = parseFloat(ttsPitchInput.value);
+    ttsPitchValue.textContent = ttsPitch.toFixed(2);
+    localStorage.setItem('ttsPitch', ttsPitch);
+  });
+}
+
+let currentTTSBtn = null;
+let currentUtter = null;
+
+function stopTTS() {
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+  }
+  if (currentTTSBtn) {
+    currentTTSBtn.classList.remove('speaking');
+    currentTTSBtn.setAttribute('aria-pressed', 'false');
+    currentTTSBtn.disabled = false;
+    currentTTSBtn = null;
+  }
+}
+
+function speakText(text, lang, btn) {
+  // Toggle: אם אותו כפתור – עצור
+  if (currentTTSBtn === btn && window.speechSynthesis.speaking) {
+    stopTTS();
+    return;
+  }
+  stopTTS();
+  const utter = new window.SpeechSynthesisUtterance(text);
+  utter.lang = lang;
+  utter.rate = ttsRate;
+  utter.pitch = ttsPitch;
+  const voice = getBestVoice(lang);
+  if (voice) utter.voice = voice;
+  if (btn) {
+    btn.classList.add('speaking');
+    btn.setAttribute('aria-pressed', 'true');
+    btn.disabled = false;
+    currentTTSBtn = btn;
+    utter.onend = utter.onerror = () => {
+      if (btn) {
+        btn.classList.remove('speaking');
+        btn.setAttribute('aria-pressed', 'false');
+        btn.disabled = false;
+      }
+      currentTTSBtn = null;
+      currentUtter = null;
+    };
+  }
+  currentUtter = utter;
+  window.speechSynthesis.speak(utter);
+  return utter;
+}
+
+// החזרת טקסט מלא מה-i18n לכל סקשן
+function getSectionI18nText(sectionId) {
+  const dict = window.currentDict;
+  if (!dict) return '';
+  switch (sectionId) {
+    case 'define':
+      return [
+        dict.define.title,
+        dict.define.desc,
+        dict.define.card1Title + ': ' + dict.define.card1Desc,
+        dict.define.card2Title + ': ' + dict.define.card2Desc,
+        dict.define.card3Title + ': ' + dict.define.card3Desc
+      ].join('\n');
+    case 'identify':
+      return [
+        dict.identify.title,
+        dict.identify.desc,
+        dict.identify.tabVictim + ': ' + dict.identify.victimSigns.join(', '),
+        dict.identify.tabBully + ': ' + dict.identify.bullySigns.join(', ')
+      ].join('\n');
+    case 'understand':
+      return [dict.understand.title, dict.understand.desc].join('\n');
+    case 'act':
+      return [dict.act.title, dict.act.desc, dict.act.step1, dict.act.step2, dict.act.step3, dict.act.step4].join('\n');
+    case 'prevent':
+      return [dict.prevent.title, dict.prevent.desc].join('\n');
+    case 'personalize':
+      return [dict.personalize.title, dict.personalize.desc].join('\n');
+    case 'footer':
+      return [
+        dict.footer.title,
+        dict.footer.desc,
+        dict.footer.card1Title + ': ' + dict.footer.card1Desc,
+        dict.footer.card2Title + ': ' + dict.footer.card2Desc,
+        dict.footer.card3Title + ': ' + dict.footer.card3Desc,
+        dict.footer.credits
+      ].join('\n');
+    default:
+      return '';
+  }
+}
+
+function setupTTSButtons() {
+  document.querySelectorAll('.tts-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const section = btn.closest('section, footer');
+      if (!section) return;
+      const sectionId = section.id || (section.tagName === 'FOOTER' ? 'footer' : '');
+      const text = getSectionI18nText(sectionId);
+      if (!text) return;
+      speakText(text, getTTSLang(), btn);
+    });
+  });
+}
+
+function setupAdviceTTSButton() {
+  const btn = document.querySelector('.tts-advice-btn');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const text = getAdviceText();
+    if (!text) return;
+    speakText(text, getTTSLang(), btn);
+  });
+}
+
+function getAdviceText() {
+  // Get only visible text from #adviceOutput, excluding images/links/icons
+  const adviceDiv = document.getElementById('adviceOutput');
+  if (!adviceDiv) return '';
+  // Remove images, links, divs, emoji/icons
+  const clone = adviceDiv.cloneNode(true);
+  clone.querySelectorAll('img, a, div, span[aria-hidden], .emoji-icon, .flowchart-arrow').forEach(el => el.remove());
+  return clone.textContent.trim();
+}
+
+function showHebrewTTSWarningIfNeeded() {
+  if (window.currentLang === 'he') {
+    setTimeout(() => {
+      const hasVoice = window.speechSynthesis.getVoices().some(v => v.lang === 'he-IL');
+      const warningDiv = document.getElementById('tts-warning');
+      if (!hasVoice && warningDiv) {
+        warningDiv.innerHTML = `
+          <span>לא נמצא קול עברי במערכת. <br>
+          <a href="https://support.microsoft.com/he-il/windows/%D7%94%D7%95%D7%A1%D7%A4%D7%AA-%D7%A7%D7%95%D7%9C%D7%95%D7%AA-%D7%93%D7%99%D7%91%D7%95%D7%A8-%D7%91-windows-10-71c64e37-28fa-4652-b05a-2b1b1e0127a0" target="_blank" rel="noopener" tabindex="0">להתקנת קול עברי ב-Windows לחצו כאן</a>
+          </span>
+        `;
+        warningDiv.style.display = '';
+      } else if (warningDiv) {
+        warningDiv.style.display = 'none';
+      }
+    }, 800);
+  } else {
+    const warningDiv = document.getElementById('tts-warning');
+    if (warningDiv) warningDiv.style.display = 'none';
+  }
+}
+window.speechSynthesis.onvoiceschanged = showHebrewTTSWarningIfNeeded;
+// הפעל גם אחרי טעינת שפה
+const origSetLanguage = setLanguage;
+setLanguage = async function(lang) {
+  await origSetLanguage(lang);
+  showHebrewTTSWarningIfNeeded();
+};
+
+// =====================
 // On Page Load
 // =====================
 const savedLang = localStorage.getItem('lang') || 'he';
@@ -505,4 +713,13 @@ window.addEventListener('DOMContentLoaded', async () => {
   for (const section of sectionQueries) {
     await updateSectionImage(section.id, section.text, window.currentLang, 'Section illustration');
   }
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  // Ensure voices are loaded before first TTS use
+  if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = () => {};
+  }
+  setupTTSButtons();
+  setupAdviceTTSButton();
 }); 
