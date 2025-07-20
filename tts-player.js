@@ -167,8 +167,8 @@
       return `<option value="${v.voiceURI}"${(saved ? v.voiceURI === saved : v.default) ? ' selected' : ''}>${label}${v.localService ? '' : ' 🌐'}</option>`;
     }).join('');
     const label = lang.startsWith('he') ? 'בחר קול' : lang.startsWith('fr') ? 'Choisir une voix' : 'Choose voice';
-    return `<label for="ttsplayer-voice" style="margin-bottom:0.2em;display:block;text-align:${dir==='rtl'?'right':'left'};font-weight:bold;color:#0077C0;">${label}:</label>
-      <select id="ttsplayer-voice" class="ttsplayer-voice" style="margin-bottom:1em;max-width:260px;width:100%;border-radius:1em;padding:0.4em 0.7em;">
+    return `<span class="ttsplayer-voice-label">${label}:</span>
+      <select id="ttsplayer-voice" class="ttsplayer-voice">
         ${options}
       </select>`;
   }
@@ -192,51 +192,97 @@
   }
 
   function open(args) {
-    // בדוק אם נבחרה עברית ואין קול עברי
-    if (args.lang && args.lang.startsWith('he')) {
-      const voices = window.speechSynthesis.getVoices();
-      const hasHebrew = voices.some(v => v.lang === 'he-IL');
-      if (!hasHebrew) {
-        // הצג הודעה במקום popup
-        closePopup();
-        const warn = document.createElement('div');
-        warn.className = 'ttsplayer-popup';
-        warn.setAttribute('role', 'alertdialog');
-        warn.setAttribute('aria-modal', 'true');
-        warn.setAttribute('tabindex', '0');
-        warn.setAttribute('dir', 'rtl');
-        warn.style.position = 'fixed';
-        warn.style.left = '50%';
-        warn.style.top = '50%';
-        warn.style.transform = 'translate(-50%, -50%)';
-        warn.style.zIndex = 9999;
-        warn.innerHTML = `
-          <button class="ttsplayer-close" aria-label="סגור" title="סגור">✖️</button>
-          <div class="ttsplayer-title" style="color:#E63946;">לא נמצא קול עברי במערכת</div>
-          <div class="ttsplayer-text" style="text-align:center; font-size:1.1em;">
-            <p>כדי להפעיל הקראת טקסט בעברית, יש להוסיף קול עברי למערכת ההפעלה.<br><br>
-            <b>הוראות התקנת קול עברי ב-Windows:</b></p>
-            <ol style="text-align:right; direction:rtl; margin:0 auto; max-width:400px; font-size:1em; padding-right:1.2em;">
-              <li>פתחו את <b>הגדרות Windows</b> (Settings).</li>
-              <li>עברו ל- <b>זמן ושפה</b> (Time & Language) &rarr; <b>דיבור</b> (Speech).</li>
-              <li>גללו לקטע <b>קולות</b> (Voices) ולחצו <b>הוסף קולות</b> (Add voices).</li>
-              <li>בחרו <b>עברית (Hebrew)</b> מהרשימה ולחצו <b>התקן</b> (Install).</li>
-              <li>לאחר ההתקנה, סגרו את הדפדפן ופתחו מחדש.</li>
-            </ol>
-            <div style="color:#888; font-size:0.95em; margin-top:0.7em;">הקול העברי יופיע ברשימת הקולות של מערכת Windows. ייתכן שתצטרכו להפעיל מחדש את הדפדפן.</div>
-          </div>
-        `;
-        document.body.appendChild(warn);
-        setTimeout(() => warn.focus(), 50);
-        warn.querySelector('.ttsplayer-close').onclick = () => { warn.remove(); };
-        warn.addEventListener('keydown', e => { if (e.key === 'Escape') warn.remove(); });
-        return;
+    // בדוק אם יש קול מתאים לשפה (לא רק עברית)
+    const lang = args.lang || 'en';
+    const langName = lang.startsWith('he') ? 'עברית' : lang.startsWith('fr') ? 'צרפתית' : 'אנגלית';
+    const voices = window.speechSynthesis.getVoices();
+    const hasVoice = voices.some(v => v.lang && v.lang.startsWith(lang.slice(0,2)));
+    if (!hasVoice) {
+      closePopup();
+      const warn = document.createElement('div');
+      warn.className = 'ttsplayer-popup';
+      warn.setAttribute('role', 'alertdialog');
+      warn.setAttribute('aria-modal', 'true');
+      warn.setAttribute('tabindex', '0');
+      warn.setAttribute('dir', lang.startsWith('he') ? 'rtl' : 'ltr');
+      warn.style.position = 'fixed';
+      warn.style.left = '50%';
+      warn.style.top = '50%';
+      warn.style.transform = 'translate(-50%, -50%)';
+      warn.style.zIndex = 9999;
+      let winSteps = '';
+      let macSteps = '';
+      if (lang.startsWith('he')) {
+        winSteps = `<ol style="text-align:right; direction:rtl; margin:0 auto; max-width:400px; font-size:1em; padding-right:1.2em;">
+          <li>פתחו את <b>הגדרות Windows</b> (Settings).</li>
+          <li>עברו ל- <b>זמן ושפה</b> (Time & Language) &rarr; <b>דיבור</b> (Speech).</li>
+          <li>גללו לקטע <b>קולות</b> (Voices) ולחצו <b>הוסף קולות</b> (Add voices).</li>
+          <li>בחרו <b>עברית (Hebrew)</b> מהרשימה ולחצו <b>התקן</b> (Install).</li>
+          <li>לאחר ההתקנה, סגרו את הדפדפן ופתחו מחדש.</li>
+        </ol>`;
+        macSteps = `<ol style="text-align:right; direction:rtl; margin:0 auto; max-width:400px; font-size:1em; padding-right:1.2em;">
+          <li>פתחו את <b>העדפות מערכת</b> (System Preferences).</li>
+          <li>בחרו <b>נגישות</b> (Accessibility) &rarr; <b>דיבור</b> (Speech).</li>
+          <li>לחצו על <b>קולות מערכת</b> (System Voice) &rarr; <b>התאם אישית</b> (Customize).</li>
+          <li>סמנו <b>עברית (Hebrew)</b> ולחצו <b>הורד</b> (Download).</li>
+          <li>לאחר ההורדה, סגרו ופתחו מחדש את הדפדפן.</li>
+        </ol>`;
+      } else if (lang.startsWith('fr')) {
+        winSteps = `<ol style="text-align:left; direction:ltr; margin:0 auto; max-width:400px; font-size:1em; padding-left:1.2em;">
+          <li>Ouvrez <b>Paramètres Windows</b> (Settings).</li>
+          <li>Allez dans <b>Heure et langue</b> (Time & Language) &rarr; <b>Voix</b> (Speech).</li>
+          <li>Faites défiler jusqu'à <b>Voix</b> et cliquez sur <b>Ajouter des voix</b> (Add voices).</li>
+          <li>Sélectionnez <b>Français (French)</b> et cliquez sur <b>Installer</b> (Install).</li>
+          <li>Après l'installation, fermez et rouvrez le navigateur.</li>
+        </ol>`;
+        macSteps = `<ol style="text-align:left; direction:ltr; margin:0 auto; max-width:400px; font-size:1em; padding-left:1.2em;">
+          <li>Ouvrez <b>Préférences Système</b> (System Preferences).</li>
+          <li>Choisissez <b>Accessibilité</b> (Accessibility) &rarr; <b>Parole</b> (Speech).</li>
+          <li>Cliquez sur <b>Voix du système</b> (System Voice) &rarr; <b>Personnaliser</b> (Customize).</li>
+          <li>Cochez <b>Français (French)</b> et cliquez sur <b>Télécharger</b> (Download).</li>
+          <li>Après le téléchargement, fermez et rouvrez le navigateur.</li>
+        </ol>`;
+      } else {
+        // אנגלית או ברירת מחדל
+        winSteps = `<ol style="text-align:left; direction:ltr; margin:0 auto; max-width:400px; font-size:1em; padding-left:1.2em;">
+          <li>Open <b>Windows Settings</b>.</li>
+          <li>Go to <b>Time & Language</b> &rarr; <b>Speech</b>.</li>
+          <li>Scroll to <b>Voices</b> and click <b>Add voices</b>.</li>
+          <li>Select <b>English</b> (or your preferred language) and click <b>Install</b>.</li>
+          <li>After installation, close and reopen your browser.</li>
+        </ol>`;
+        macSteps = `<ol style="text-align:left; direction:ltr; margin:0 auto; max-width:400px; font-size:1em; padding-left:1.2em;">
+          <li>Open <b>System Preferences</b>.</li>
+          <li>Choose <b>Accessibility</b> &rarr; <b>Speech</b>.</li>
+          <li>Click <b>System Voice</b> &rarr; <b>Customize</b>.</li>
+          <li>Check <b>English</b> (or your preferred language) and click <b>Download</b>.</li>
+          <li>After download, close and reopen your browser.</li>
+        </ol>`;
       }
+      let msg = '';
+      if (lang.startsWith('he')) {
+        msg = `<p>כדי להפעיל הקראת טקסט ב<b>${langName}</b>, יש להוסיף קול ${langName} למערכת ההפעלה.<br><br><b>הוראות התקנת קול ב-Windows:</b></p>${winSteps}<br><b>הוראות התקנת קול ב-Mac:</b>${macSteps}`;
+      } else if (lang.startsWith('fr')) {
+        msg = `<p>Pour activer la synthèse vocale en <b>${langName}</b>, ajoutez une voix ${langName} à votre système d'exploitation.<br><br><b>Instructions pour Windows :</b></p>${winSteps}<br><b>Instructions pour Mac :</b>${macSteps}`;
+      } else {
+        msg = `<p>To enable text-to-speech in <b>${langName}</b>, add a ${langName} voice to your operating system.<br><br><b>Windows instructions:</b></p>${winSteps}<br><b>Mac instructions:</b>${macSteps}`;
+      }
+      warn.innerHTML = `
+        <button class="ttsplayer-close" aria-label="${lang.startsWith('he') ? 'סגור' : lang.startsWith('fr') ? 'Fermer' : 'Close'}" title="${lang.startsWith('he') ? 'סגור' : lang.startsWith('fr') ? 'Fermer' : 'Close'}">✖️</button>
+        <div class="ttsplayer-title" style="color:#E63946;">${lang.startsWith('he') ? 'לא נמצא קול מתאים במערכת' : lang.startsWith('fr') ? 'Aucune voix compatible trouvée' : 'No compatible voice found'}</div>
+        <div class="ttsplayer-text" style="text-align:center; font-size:1.1em;">${msg}
+          <div style="color:#888; font-size:0.95em; margin-top:0.7em;">${lang.startsWith('he') ? 'ייתכן שתצטרכו להפעיל מחדש את הדפדפן.' : lang.startsWith('fr') ? 'Vous devrez peut-être redémarrer votre navigateur.' : 'You may need to restart your browser.'}</div>
+        </div>
+      `;
+      document.body.appendChild(warn);
+      setTimeout(() => warn.focus(), 50);
+      warn.querySelector('.ttsplayer-close').onclick = () => { warn.remove(); };
+      warn.addEventListener('keydown', e => { if (e.key === 'Escape') warn.remove(); });
+      return;
     }
     closePopup();
     lastArgs = args;
     const labels = getLabels(args.lang);
-    // RTL/LTR
     const dir = args.lang && args.lang.startsWith('he') ? 'rtl' : 'ltr';
     const voiceSelectHTML = renderVoiceSelect(args.lang, dir);
     // Popup
@@ -252,16 +298,16 @@
       <div class="ttsplayer-title">${labels.title}${args.sectionTitle ? ' – ' + args.sectionTitle : ''}</div>
       <div class="ttsplayer-section-label">${labels.section}: ${args.sectionTitle || ''}</div>
       <div class="ttsplayer-text">${args.text}</div>
-      ${voiceSelectHTML}
-      <div class="ttsplayer-controls">
-        <button class="ttsplayer-play" aria-label="${labels.play}">${labels.play}</button>
-        <span class="ttsplayer-status">${labels.stopped}</span>
-      </div>
       <div class="ttsplayer-sliders">
+        ${voiceSelectHTML}
         <label for="ttsplayer-rate">${labels.rate}: <span class="ttsplayer-rate-value">${ttsRate.toFixed(2)}</span></label>
         <input type="range" min="0.5" max="2" step="0.05" value="${ttsRate}" id="ttsplayer-rate" class="ttsplayer-slider" aria-label="${labels.rate}">
         <label for="ttsplayer-pitch">${labels.pitch}: <span class="ttsplayer-pitch-value">${ttsPitch.toFixed(2)}</span></label>
         <input type="range" min="0.5" max="2" step="0.05" value="${ttsPitch}" id="ttsplayer-pitch" class="ttsplayer-slider" aria-label="${labels.pitch}">
+      </div>
+      <div class="ttsplayer-controls">
+        <button class="ttsplayer-play" aria-label="${labels.play}">${labels.play}</button>
+        <span class="ttsplayer-status">${labels.stopped}</span>
       </div>
     `;
     document.body.appendChild(popup);

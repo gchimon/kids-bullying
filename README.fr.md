@@ -167,3 +167,25 @@ kids-bullying/
 
 (L'article complet apparaît ici, avec sous-titres, mises en valeur et listes – gardez tout le contenu original)
 
+## 🎤 Lecteur Text-to-Speech (TTS) – Popup autonome
+
+- Lecteur TTS popup moderne, centré, avec couleurs douces, boutons ronds et ombres subtiles.
+- Sélection de voix : choisissez parmi toutes les voix disponibles pour la langue (homme/femme), avec sauvegarde automatique de la préférence.
+- Sliders pour vitesse et tonalité, avec sauvegarde dans le localStorage.
+- Support complet RTL/LTR : toute l’interface, labels, boutons, menus.
+- Accessibilité élevée : ARIA, focus, navigation clavier, descriptions des boutons.
+- Alerte voix hébreu : message clair avec instructions d’installation si aucune voix hébreu n’est disponible.
+- Lecture uniquement après appui sur Play (pas automatique).
+- Design entièrement responsive.
+- Prêt pour une future version Canvas (UI graphique/animations).
+
+### Exemple d’utilisation :
+
+```js
+TTSPlayer.open({
+  text: 'Bonjour le monde',
+  lang: 'fr-FR',
+  sectionTitle: 'Exemple'
+});
+```
+

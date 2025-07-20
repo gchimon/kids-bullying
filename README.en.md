@@ -42,6 +42,30 @@ The application offers:
 
 ---
 
+## 🎤 Text-to-Speech (TTS) Player – Standalone Popup
+
+- Modern popup TTS player, centered, with soft colors, round buttons, and subtle shadows.
+- Voice selection: choose from all available voices for the language (male/female), with automatic preference saving.
+- Sliders for speech rate and pitch, with localStorage persistence.
+- Full RTL/LTR support: all UI, labels, buttons, and menus.
+- High accessibility: ARIA, focus, keyboard navigation, button descriptions.
+- Hebrew voice warning: clear message with install instructions if no Hebrew TTS is available.
+- Playback starts only when Play is pressed (not automatic).
+- Fully responsive design.
+- Ready for future Canvas-based UI/animations.
+
+### Usage:
+
+```js
+TTSPlayer.open({
+  text: 'Hello world',
+  lang: 'en-US',
+  sectionTitle: 'Example'
+});
+```
+
+---
+
 ## 🛠️ Technologies
 
 | Technology      | Purpose |

@@ -95,10 +95,11 @@
 .ttsplayer-sliders {
   display: flex;
   flex-direction: row;
-  gap: 2em;
+  gap: 2.5em;
   width: 100%;
   margin-bottom: 0.5em;
   justify-content: center;
+  align-items: flex-end;
 }
 .ttsplayer-sliders label {
   color: #0077C0;
@@ -117,9 +118,10 @@
   box-shadow: 0 1px 4px #A7C4A8;
 }
 .ttsplayer-voice {
-  margin-bottom: 1em;
-  max-width: 260px;
-  width: 100%;
+  margin-bottom: 0;
+  max-width: 180px;
+  min-width: 120px;
+  width: auto;
   border-radius: 1em;
   padding: 0.4em 0.7em;
   background: #FDFBF6;
@@ -129,10 +131,21 @@
   box-shadow: 0 1px 4px #A7C4A8;
   outline: none;
   transition: border 0.2s, box-shadow 0.2s;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
 }
 .ttsplayer-voice:focus {
   border: 2px solid #0077C0;
   box-shadow: 0 0 0 2px #7F9F80;
+}
+.ttsplayer-voice-label {
+  color: #0077C0;
+  font-weight: bold;
+  font-size: 1em;
+  margin-bottom: 0.1em;
+  margin-right: 0.3em;
+  margin-left: 0.3em;
+  display: inline-block;
 }
 [dir="rtl"] .ttsplayer-voice {
   direction: rtl;
@@ -170,6 +183,18 @@
 [dir="rtl"] .ttsplayer-close {
   right: auto;
   left: 1.3em;
+}
+@media (max-width: 700px) {
+  .ttsplayer-sliders {
+    flex-direction: column;
+    gap: 0.7em;
+    align-items: stretch;
+  }
+  .ttsplayer-voice {
+    max-width: 100%;
+    width: 100%;
+    margin-bottom: 1em;
+  }
 }
 @media (max-width: 600px) {
   .ttsplayer-popup {
