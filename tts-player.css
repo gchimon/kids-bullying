@@ -1,0 +1,187 @@
+/* tts-player.css – Popup TTS Player styles */
+.ttsplayer-popup {
+  background: linear-gradient(135deg, #FDFBF6 0%, #E3F6FF 100%);
+  color: #222;
+  border: 1.5px solid #A7C4A8;
+  border-radius: 2em;
+  box-shadow: 0 8px 32px #0002, 0 2px 8px #A7C4A8;
+  padding: 2.2em 2em 1.5em 2em;
+  min-width: 320px;
+  max-width: 95vw;
+  min-height: 220px;
+  max-height: 90vh;
+  font-family: 'Assistant', sans-serif;
+  font-size: 1.08em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: none;
+  animation: ttsplayer-fadein 0.18s;
+  position: relative;
+}
+@keyframes ttsplayer-fadein {
+  from { opacity: 0; transform: translate(-50%, -60%) scale(0.97); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+.ttsplayer-title {
+  font-size: 1.35em;
+  font-weight: bold;
+  color: #0077C0;
+  margin-bottom: 0.2em;
+  text-align: center;
+}
+.ttsplayer-section-label {
+  font-size: 1em;
+  color: #7F9F80;
+  margin-bottom: 0.7em;
+  text-align: center;
+}
+.ttsplayer-text {
+  background: rgba(255,255,255,0.85);
+  border-radius: 1.5em;
+  padding: 1.1em 1em;
+  margin-bottom: 1.1em;
+  color: #222;
+  max-height: 120px;
+  overflow-y: auto;
+  width: 100%;
+  text-align: start;
+  font-size: 1.05em;
+  box-shadow: 0 2px 8px #A7C4A8;
+}
+.ttsplayer-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.2em;
+  margin-bottom: 1em;
+}
+.ttsplayer-play {
+  background: #7F9F80;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 3.2em;
+  height: 3.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  outline: none;
+  box-shadow: 0 2px 8px #7F9F80;
+}
+.ttsplayer-play:focus, .ttsplayer-play:hover {
+  background: #005082;
+  color: #fffbe6;
+  box-shadow: 0 4px 16px #0077C0;
+}
+.ttsplayer-play svg {
+  width: 1.5em;
+  height: 1.5em;
+  display: block;
+}
+.ttsplayer-status {
+  font-size: 1em;
+  color: #0077C0;
+  font-weight: 600;
+  background: #FDFBF6;
+  border-radius: 1em;
+  padding: 0.3em 1em;
+  box-shadow: 0 1px 4px #A7C4A8;
+}
+.ttsplayer-sliders {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  width: 100%;
+  margin-bottom: 0.5em;
+  justify-content: center;
+}
+.ttsplayer-sliders label {
+  color: #0077C0;
+  font-weight: bold;
+  font-size: 1em;
+  margin-bottom: 0.1em;
+  display: block;
+  text-align: center;
+}
+.ttsplayer-slider {
+  width: 120px;
+  accent-color: #7F9F80;
+  margin-top: 0.1em;
+  margin-bottom: 0.3em;
+  border-radius: 1em;
+  box-shadow: 0 1px 4px #A7C4A8;
+}
+.ttsplayer-voice {
+  margin-bottom: 1em;
+  max-width: 260px;
+  width: 100%;
+  border-radius: 1em;
+  padding: 0.4em 0.7em;
+  background: #FDFBF6;
+  color: #222;
+  border: 1.5px solid #A7C4A8;
+  font-size: 1em;
+  box-shadow: 0 1px 4px #A7C4A8;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+.ttsplayer-voice:focus {
+  border: 2px solid #0077C0;
+  box-shadow: 0 0 0 2px #7F9F80;
+}
+[dir="rtl"] .ttsplayer-voice {
+  direction: rtl;
+  text-align: right;
+}
+[dir="ltr"] .ttsplayer-voice {
+  direction: ltr;
+  text-align: left;
+}
+.ttsplayer-close {
+  position: absolute;
+  top: 1.1em;
+  right: 1.3em;
+  background: #fff;
+  border: none;
+  color: #A7C4A8;
+  font-size: 1.3em;
+  cursor: pointer;
+  outline: none;
+  z-index: 10;
+  border-radius: 50%;
+  width: 2.2em;
+  height: 2.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px #A7C4A8;
+}
+.ttsplayer-close:focus, .ttsplayer-close:hover {
+  color: #0077C0;
+  outline: 2px solid #0077C0;
+  outline-offset: 2px;
+  background: #FDFBF6;
+}
+[dir="rtl"] .ttsplayer-close {
+  right: auto;
+  left: 1.3em;
+}
+@media (max-width: 600px) {
+  .ttsplayer-popup {
+    min-width: 90vw;
+    padding: 1.1em 0.5em 0.7em 0.5em;
+    font-size: 0.98em;
+  }
+  .ttsplayer-text {
+    max-height: 80px;
+    font-size: 0.97em;
+  }
+  .ttsplayer-slider {
+    width: 80px;
+  }
+} 

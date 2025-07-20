@@ -450,104 +450,7 @@ function updateLanguageUI(lang) {
 // =====================
 // Text-to-Speech (TTS) for Sections
 // =====================
-function getBestVoice(lang) {
-  const voices = window.speechSynthesis.getVoices();
-  // Hebrew
-  if (lang === 'he-IL') {
-    return voices.find(v => v.lang === 'he-IL' && v.name.includes('Google')) ||
-           voices.find(v => v.lang === 'he-IL');
-  }
-  // French
-  if (lang === 'fr-FR') {
-    return voices.find(v => v.lang === 'fr-FR' && v.name.includes('Google')) ||
-           voices.find(v => v.lang === 'fr-FR');
-  }
-  // English
-  if (lang === 'en-US') {
-    return voices.find(v => v.lang === 'en-US' && v.name.includes('Google')) ||
-           voices.find(v => v.lang === 'en-US');
-  }
-  // fallback
-  return voices[0];
-}
-
-function getTTSLang() {
-  if (window.currentLang === 'he') return 'he-IL';
-  if (window.currentLang === 'fr') return 'fr-FR';
-  return 'en-US';
-}
-
-// =====================
-// TTS Controls (rate & pitch)
-// =====================
-const ttsRateInput = document.getElementById('tts-rate');
-const ttsPitchInput = document.getElementById('tts-pitch');
-const ttsRateValue = document.getElementById('tts-rate-value');
-const ttsPitchValue = document.getElementById('tts-pitch-value');
-if (ttsRateInput && ttsPitchInput && ttsRateValue && ttsPitchValue) {
-  ttsRateInput.value = ttsRate;
-  ttsPitchInput.value = ttsPitch;
-  ttsRateValue.textContent = ttsRate.toFixed(2);
-  ttsPitchValue.textContent = ttsPitch.toFixed(2);
-  ttsRateInput.addEventListener('input', () => {
-    ttsRate = parseFloat(ttsRateInput.value);
-    ttsRateValue.textContent = ttsRate.toFixed(2);
-    localStorage.setItem('ttsRate', ttsRate);
-  });
-  ttsPitchInput.addEventListener('input', () => {
-    ttsPitch = parseFloat(ttsPitchInput.value);
-    ttsPitchValue.textContent = ttsPitch.toFixed(2);
-    localStorage.setItem('ttsPitch', ttsPitch);
-  });
-}
-
-let currentTTSBtn = null;
-let currentUtter = null;
-
-function stopTTS() {
-  if (window.speechSynthesis.speaking) {
-    window.speechSynthesis.cancel();
-  }
-  if (currentTTSBtn) {
-    currentTTSBtn.classList.remove('speaking');
-    currentTTSBtn.setAttribute('aria-pressed', 'false');
-    currentTTSBtn.disabled = false;
-    currentTTSBtn = null;
-  }
-}
-
-function speakText(text, lang, btn) {
-  // Toggle: אם אותו כפתור – עצור
-  if (currentTTSBtn === btn && window.speechSynthesis.speaking) {
-    stopTTS();
-    return;
-  }
-  stopTTS();
-  const utter = new window.SpeechSynthesisUtterance(text);
-  utter.lang = lang;
-  utter.rate = ttsRate;
-  utter.pitch = ttsPitch;
-  const voice = getBestVoice(lang);
-  if (voice) utter.voice = voice;
-  if (btn) {
-    btn.classList.add('speaking');
-    btn.setAttribute('aria-pressed', 'true');
-    btn.disabled = false;
-    currentTTSBtn = btn;
-    utter.onend = utter.onerror = () => {
-      if (btn) {
-        btn.classList.remove('speaking');
-        btn.setAttribute('aria-pressed', 'false');
-        btn.disabled = false;
-      }
-      currentTTSBtn = null;
-      currentUtter = null;
-    };
-  }
-  currentUtter = utter;
-  window.speechSynthesis.speak(utter);
-  return utter;
-}
+// (הוסרו כל הפונקציות הישנות: getBestVoice, getTTSLang, speakText, stopTTS, setupTTSButtons, setupAdviceTTSButton, showHebrewTTSWarningBubble, וכו')
 
 // החזרת טקסט מלא מה-i18n לכל סקשן
 function getSectionI18nText(sectionId) {
@@ -591,54 +494,6 @@ function getSectionI18nText(sectionId) {
   }
 }
 
-function showHebrewTTSWarningBubble(btn) {
-  // הסר בועית קיימת
-  document.querySelectorAll('.tts-warning-bubble').forEach(b => b.remove());
-  if (!btn || !btn.classList.contains('tts-btn')) return;
-  if (window.currentLang !== 'he') return;
-  const hasVoice = window.speechSynthesis.getVoices().some(v => v.lang === 'he-IL');
-  if (hasVoice) return;
-  // צור בועית חדשה
-  const bubble = document.createElement('div');
-  bubble.className = 'tts-warning-bubble';
-  bubble.setAttribute('role', 'status');
-  bubble.setAttribute('aria-live', 'polite');
-  bubble.setAttribute('tabindex', '0');
-  bubble.innerHTML = `
-    לא נמצא קול עברי במערכת.<br>
-    <a href="https://support.microsoft.com/he-il/windows/%D7%94%D7%95%D7%A1%D7%A4%D7%AA-%D7%A7%D7%95%D7%9C%D7%95%D7%AA-%D7%93%D7%99%D7%91%D7%95%D7%A8-%D7%91-windows-10-71c64e37-28fa-4652-b05a-2b1b1e0127a0" target="_blank" rel="noopener" tabindex="0">להתקנת קול עברי ב-Windows לחצו כאן</a>
-  `;
-  // מיקום יחסי לכפתור
-  btn.style.position = 'relative';
-  btn.parentNode.insertBefore(bubble, btn.nextSibling);
-}
-
-// עדכן את setupTTSButtons ו-setupAdviceTTSButton להפעיל את הבועית במידת הצורך
-function setupTTSButtons() {
-  document.querySelectorAll('.tts-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const section = btn.closest('section, footer');
-      if (!section) return;
-      const sectionId = section.id || (section.tagName === 'FOOTER' ? 'footer' : '');
-      const text = getSectionI18nText(sectionId);
-      if (!text) return;
-      // הצג בועית אם צריך
-      showHebrewTTSWarningBubble(btn);
-      speakText(text, getTTSLang(), btn);
-    });
-  });
-}
-function setupAdviceTTSButton() {
-  const btn = document.querySelector('.tts-advice-btn');
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    const text = getAdviceText();
-    if (!text) return;
-    showHebrewTTSWarningBubble(btn);
-    speakText(text, getTTSLang(), btn);
-  });
-}
-
 function getAdviceText() {
   // Get only visible text from #adviceOutput, excluding images/links/icons
   const adviceDiv = document.getElementById('adviceOutput');
@@ -649,11 +504,41 @@ function getAdviceText() {
   return clone.textContent.trim();
 }
 
+// ===============
+// TTSPlayer integration
+// ===============
+function setupTTSButtons() {
+  document.querySelectorAll('.tts-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const section = btn.closest('section, footer');
+      if (!section) return;
+      const sectionId = section.id || (section.tagName === 'FOOTER' ? 'footer' : '');
+      const text = getSectionI18nText(sectionId);
+      if (!text) return;
+      const lang = window.currentLang === 'he' ? 'he-IL' : window.currentLang === 'fr' ? 'fr-FR' : 'en-US';
+      const sectionTitle = section.querySelector('h2')?.textContent || '';
+      TTSPlayer.open({ text, lang, sectionTitle });
+    });
+  });
+}
+function setupAdviceTTSButton() {
+  const btn = document.querySelector('.tts-advice-btn');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const text = getAdviceText();
+    if (!text) return;
+    const lang = window.currentLang === 'he' ? 'he-IL' : window.currentLang === 'fr' ? 'fr-FR' : 'en-US';
+    const sectionTitle = document.getElementById('personalize-title')?.textContent || '';
+    TTSPlayer.open({ text, lang, sectionTitle });
+  });
+}
+
 // הפעל גם אחרי טעינת שפה
 const origSetLanguage = setLanguage;
 setLanguage = async function(lang) {
   await origSetLanguage(lang);
-  // showHebrewTTSWarningIfNeeded(); // This function is no longer needed
+  setupTTSButtons();
+  setupAdviceTTSButton();
 };
 
 // ===============
@@ -816,7 +701,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const hasVoice = window.speechSynthesis.getVoices().some(v => v.lang === 'he-IL');
       if (!hasVoice) {
         const firstBtn = document.querySelector('.tts-btn');
-        if (firstBtn) showHebrewTTSWarningBubble(firstBtn);
+        if (firstBtn) TTSPlayer.open({ text: 'לא נמצא קול עברי במערכת.', lang: 'he-IL', sectionTitle: 'הגדרות' });
       }
     }
   }, 800); // זמן קצר לטעינת קולות
