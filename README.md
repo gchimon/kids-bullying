@@ -162,3 +162,25 @@ window.PIXABAY_API_KEY = 'הכנס_כאן_את_המפתח_שלך';
 **שים לב:**
 - אין לשתף את המפתח שלך בפומבי.
 - כל משתמש צריך להגדיר את המפתח בעצמו בקובץ `config.js` מקומי. 
+
+## מבנה הפרויקט
+
+להלן מבנה תיקיות ודוגמה לקבצים עיקריים בפרויקט. יש להוסיף את הקובץ `config.js` ישירות בתיקיית `kids-bullying/` (ליד index.html, script.js וכו').
+
+```
+kids-bullying/
+├── i18n/
+│   ├── he.json
+│   ├── en.json
+│   └── fr.json
+├── index.html
+├── info.html
+├── gov_resources.html
+├── script.js
+├── style.css
+├── mock_advice.js
+├── config.js   ← כאן יש להוסיף את קובץ המפתח ל-Pixabay
+└── README.md
+```
+
+> **הערה:** קובץ `config.js` לא קיים כברירת מחדל, ויש ליצור אותו ידנית לפי ההוראות למטה. 

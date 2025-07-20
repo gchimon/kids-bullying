@@ -56,6 +56,30 @@ The application offers:
 
 ---
 
+## Project Structure
+
+Below is the recommended folder structure for the project. You should add your `config.js` file directly inside the `kids-bullying/` directory (next to index.html, script.js, etc.).
+
+```
+kids-bullying/
+├── i18n/
+│   ├── he.json
+│   ├── en.json
+│   └── fr.json
+├── index.html
+├── info.html
+├── gov_resources.html
+├── script.js
+├── style.css
+├── mock_advice.js
+├── config.js   ← Place your Pixabay API key file here
+└── README.en.md
+```
+
+> **Note:** The `config.js` file is not included by default. You must create it manually as described above.
+
+---
+
 ## 🖼️ Personal Advice Image Dynamics
 
 - Each personalized advice includes a relevant image shown after the text, based on mapped keywords in the interface language (e.g., "isolation", "verbal bullying", "fear", "friendship").

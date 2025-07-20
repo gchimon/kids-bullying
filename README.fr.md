@@ -54,6 +54,28 @@ L'application propose :
    ```
 3. 🌐 Ouvrez un navigateur et allez à l'adresse : [http://localhost:8080/](http://localhost:8080/)
 
+## Structure du projet
+
+Voici la structure recommandée du dossier pour le projet. Vous devez ajouter votre fichier `config.js` directement dans le dossier `kids-bullying/` (à côté de index.html, script.js, etc.).
+
+```
+kids-bullying/
+├── i18n/
+│   ├── he.json
+│   ├── en.json
+│   └── fr.json
+├── index.html
+├── info.html
+├── gov_resources.html
+├── script.js
+├── style.css
+├── mock_advice.js
+├── config.js   ← Placez ici votre fichier de clé API Pixabay
+└── README.fr.md
+```
+
+> **Remarque :** Le fichier `config.js` n'est pas inclus par défaut. Vous devez le créer manuellement comme décrit ci-dessus.
+
 ---
 
 ## 🖼️ Dynamique des images de conseils personnalisés
