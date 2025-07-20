@@ -2,6 +2,18 @@
 // מנוע ייעוץ דמה: תשובות מפורטות למצבי בריונות, ללא צורך ב-API
 // דורש את mock_advice.js באותו תיקייה
 
+/*
+====================
+Global Image Refresh Rate Limit & Anti-Script Protection
+====================
+All image refresh buttons (section images and personalized advice) are protected by a global rate limiter:
+- If the user clicks any refresh button more than 5 times in 10 seconds, a warning is shown and no API call is made.
+- If more than 15 refreshes in 60 seconds, or 8 in 20 seconds, all refresh buttons are locked for 2 minutes (to prevent abuse or scripts from draining API credits).
+- While locked, any click shows a toast message and does not trigger an API call.
+- After 2 minutes, the buttons are automatically unlocked.
+This logic is enforced in one place (canRefreshImageGlobal) and used by all refresh buttons.
+*/
+
 // =====================
 // Tab Functionality
 // =====================
@@ -207,26 +219,179 @@ async function getPixabayImageUrl(query, lang, imgIndex = 0) {
 }
 
 // =====================
-// Section Image Loader (Reusable)
+// Section Image Cache & Refresh
 // =====================
+const sectionImageCache = {};
+
+function getSectionCacheKey(sectionId, lang, query) {
+  return `${sectionId}__${lang}__${query}`;
+}
+
+async function fetchPixabayImages(query, lang, page = 1) {
+  const API_KEY = window.PIXABAY_API_KEY || '';
+  let q = query;
+  let apiLang = lang;
+  if (lang === 'he') {
+    q = getPixabayQuery(query, 'he');
+    apiLang = 'en';
+  }
+  const url = `https://pixabay.com/api/?key=${API_KEY}&q=${encodeURIComponent(q)}&image_type=photo&orientation=horizontal&safesearch=true&per_page=10&page=${page}&lang=${apiLang}`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.hits && data.hits.length > 0) {
+      // סנן kinder
+      const filtered = data.hits.filter(hit =>
+        !(hit.tags && hit.tags.toLowerCase().includes('kinder')) &&
+        !(hit.pageURL && hit.pageURL.toLowerCase().includes('kinder'))
+      );
+      const images = filtered.length > 0 ? filtered : data.hits;
+      return images.map(img => img.webformatURL);
+    }
+  } catch (e) {
+    console.error('Pixabay fetch error:', e);
+  }
+  return [];
+}
+
 async function updateSectionImage(sectionId, queryText, lang, altText) {
   const container = document.getElementById(sectionId);
   if (!container) return;
   const query = getPixabayQuery(queryText, lang);
-  // אינדקס רנדומלי בטעינה ראשונה
-  const key = `imgIdx_${sectionId}_${lang}`;
-  let imgIdx = localStorage.getItem(key);
-  if (imgIdx === null) {
-    imgIdx = Math.floor(Math.random() * 10);
-    localStorage.setItem(key, imgIdx.toString());
-  } else {
-    imgIdx = parseInt(imgIdx, 10);
-    if (isNaN(imgIdx)) imgIdx = 0;
+  const cacheKey = getSectionCacheKey(sectionId, lang, query);
+  if (!sectionImageCache[cacheKey]) {
+    sectionImageCache[cacheKey] = { urls: [], idx: 0, page: 1 };
   }
-  const imgUrl = await getPixabayImageUrl(query, lang, imgIdx);
-  container.innerHTML = imgUrl
-    ? `<div class="section-img-bg" style="background-image:url('${imgUrl}')"><span class="section-img-alt" aria-label="${altText}">${altText}</span></div>`
-    : '<div style="color:#888">No image found</div>';
+  const cache = sectionImageCache[cacheKey];
+  // אם אין תמונות בקאש, הבא ראשונות
+  if (cache.urls.length === 0) {
+    cache.urls = await fetchPixabayImages(query, lang, cache.page);
+    cache.idx = 0;
+  }
+  // אם עדיין אין תמונות, הצג הודעה
+  if (cache.urls.length === 0) {
+    container.innerHTML = '<div class="img-refresh-row"><button class="refresh-img-btn" aria-label="רענן תמונה" title="רענן תמונה">🔄</button><div class="img-indicator" aria-live="polite">0 / 0</div></div><div style="color:#888">לא נמצאה תמונה</div>';
+    setupRefreshImageButtons();
+    return;
+  }
+  // הצג תמונה נוכחית + כפתור רענון + אינדיקציה
+  const imgUrl = cache.urls[cache.idx];
+  const current = cache.idx + 1;
+  const total = cache.urls.length;
+  let indicatorText = `${current} / ${total}`;
+  if (window.currentDict && window.currentDict.ui && window.currentDict.ui.imageIndicator) {
+    indicatorText = window.currentDict.ui.imageIndicator.replace('{current}', current).replace('{total}', total);
+  }
+  container.innerHTML = `
+    <div class="section-img-bg" style="background-image:url('${imgUrl}')">
+      <span class="section-img-alt" aria-label="${altText}">${altText}</span>
+    </div>
+    <div class="img-refresh-row">
+      <button class="refresh-img-btn" aria-label="רענן תמונה" title="רענן תמונה">🔄</button>
+      <div class="img-indicator" aria-live="polite">${indicatorText}</div>
+    </div>
+  `;
+  setupRefreshImageButtons();
+}
+
+// כפתור רענון תמונה
+function setupRefreshImageButtons() {
+  document.querySelectorAll('.refresh-img-btn').forEach(btn => {
+    btn.onclick = null;
+    btn.addEventListener('click', async function(e) {
+      if (globalRefreshLocked) {
+        showAdviceToast('הפעולה נחסמה זמנית עקב רענונים מרובים. נסה שוב בעוד 2 דקות.');
+        return;
+      }
+      if (!canRefreshImageGlobal()) {
+        return;
+      }
+      // תיקון: זיהוי sectionId נכון גם אם הכפתור לא ישיר תחת הסקשן
+      const container = btn.closest('[id^=section-img-]');
+      const sectionId = container ? container.id : '';
+      // נזהה את queryText והlang לפי sectionId
+      let lang = window.currentLang || 'he';
+      let dict = window.currentDict;
+      let altText = '';
+      let queryText = '';
+      // נזהה לפי sectionId
+      switch(sectionId) {
+        case 'section-img-define':
+          altText = dict.sectionImages['section-img-define'] || '';
+          queryText = dict.define.title;
+          break;
+        case 'section-img-identify':
+          altText = dict.sectionImages['section-img-identify'] || '';
+          queryText = dict.identify.title;
+          break;
+        case 'section-img-understand':
+          altText = dict.sectionImages['section-img-understand'] || '';
+          queryText = dict.understand.title;
+          break;
+        case 'section-img-act':
+          altText = dict.sectionImages['section-img-act'] || '';
+          queryText = dict.act.title;
+          break;
+        case 'section-img-prevent':
+          altText = dict.sectionImages['section-img-prevent'] || '';
+          queryText = dict.prevent.title;
+          break;
+        case 'section-img-personalize':
+          altText = dict.sectionImages['section-img-personalize'] || '';
+          queryText = dict.personalize.title;
+          break;
+        case 'section-img-footer':
+          altText = dict.sectionImages['section-img-footer'] || '';
+          queryText = dict.footer.title;
+          break;
+        default:
+          altText = '';
+          queryText = '';
+      }
+      const query = getPixabayQuery(queryText, lang);
+      const cacheKey = getSectionCacheKey(sectionId, lang, query);
+      if (!sectionImageCache[cacheKey]) {
+        sectionImageCache[cacheKey] = { urls: [], idx: 0, page: 1 };
+      }
+      const cache = sectionImageCache[cacheKey];
+      // עבור לתמונה הבאה
+      cache.idx++;
+      if (cache.idx >= cache.urls.length) {
+        // נסה להביא page נוסף
+        cache.page++;
+        const newUrls = await fetchPixabayImages(query, lang, cache.page);
+        if (newUrls.length > 0) {
+          cache.urls = newUrls;
+          cache.idx = 0;
+        } else {
+          // אין עוד תוצאות, חזור להתחלה
+          cache.idx = 0;
+        }
+      }
+      // הצג
+      if (cache.urls.length === 0) {
+        container.innerHTML = '<div class="img-refresh-row"><button class="refresh-img-btn" aria-label="רענן תמונה" title="רענן תמונה">🔄</button><div class="img-indicator" aria-live="polite">0 / 0</div></div><div style="color:#888">לא נמצאה תמונה</div>';
+      } else {
+        const imgUrl = cache.urls[cache.idx];
+        const current = cache.idx + 1;
+        const total = cache.urls.length;
+        let indicatorText = `${current} / ${total}`;
+        if (window.currentDict && window.currentDict.ui && window.currentDict.ui.imageIndicator) {
+          indicatorText = window.currentDict.ui.imageIndicator.replace('{current}', current).replace('{total}', total);
+        }
+        container.innerHTML = `
+          <div class="section-img-bg" style="background-image:url('${imgUrl}')">
+            <span class="section-img-alt" aria-label="${altText}">${altText}</span>
+          </div>
+          <div class="img-refresh-row">
+            <button class="refresh-img-btn" aria-label="רענן תמונה" title="רענן תמונה">🔄</button>
+            <div class="img-indicator" aria-live="polite">${indicatorText}</div>
+          </div>
+        `;
+      }
+      setupRefreshImageButtons();
+    });
+  });
 }
 
 // =====================
@@ -644,6 +809,153 @@ window.addEventListener('DOMContentLoaded', async () => {
 // =====================
 // Personalized Advice with Dynamic Image
 // =====================
+// Advice image cache
+const adviceImageCache = {};
+function getAdviceCacheKey(prompt, lang) {
+  return `${lang}__${prompt.trim().toLowerCase()}`;
+}
+async function fetchAdviceImages(query, lang, page = 1) {
+  return await fetchPixabayImages(query, lang, page);
+}
+// Toast for rate limit (used globally)
+function showAdviceToast(msg) {
+  let toast = document.getElementById('advice-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'advice-toast';
+    toast.style.position = 'fixed';
+    toast.style.bottom = '2.5rem';
+    toast.style.left = '50%';
+    toast.style.transform = 'translateX(-50%)';
+    toast.style.background = '#fff';
+    toast.style.color = '#0077C0';
+    toast.style.padding = '0.7em 1.5em';
+    toast.style.borderRadius = '1.2em';
+    toast.style.boxShadow = '0 2px 12px #0002';
+    toast.style.fontWeight = 'bold';
+    toast.style.fontSize = '1.1em';
+    toast.style.zIndex = 9999;
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.style.display = 'block';
+  setTimeout(() => { toast.style.display = 'none'; }, 2200);
+}
+// Global image refresh rate limit + anti-script protection
+let globalRefreshClicks = [];
+let globalRefreshLocked = false;
+let globalRefreshUnlockTimeout = null;
+function canRefreshImageGlobal() {
+  if (globalRefreshLocked) return false;
+  const now = Date.now();
+  globalRefreshClicks = globalRefreshClicks.filter(ts => now - ts < 60000);
+  // Strong protection: 15 in 60s or 8 in 20s
+  const last20s = globalRefreshClicks.filter(ts => now - ts < 20000);
+  if (globalRefreshClicks.length >= 15 || last20s.length >= 8) {
+    globalRefreshLocked = true;
+    showAdviceToast('הפעולה נחסמה זמנית עקב רענונים מרובים. נסה שוב בעוד 2 דקות.');
+    if (globalRefreshUnlockTimeout) clearTimeout(globalRefreshUnlockTimeout);
+    globalRefreshUnlockTimeout = setTimeout(() => {
+      globalRefreshLocked = false;
+      showAdviceToast('הכפתור שוחרר, אפשר לרענן שוב.');
+    }, 120000); // 2 דקות
+    return false;
+  }
+  // Normal rate limit
+  globalRefreshClicks = globalRefreshClicks.filter(ts => now - ts < 10000);
+  if (globalRefreshClicks.length >= 5) {
+    showAdviceToast('האט בבקשה, כדי לא לבזבז את הקרדיט על התמונות');
+    return false;
+  }
+  globalRefreshClicks.push(now);
+  return true;
+}
+async function renderAdviceOutput(advice, userPrompt, lang) {
+  const query = getPixabayQuery(userPrompt, lang);
+  const cacheKey = getAdviceCacheKey(userPrompt, lang);
+  if (!adviceImageCache[cacheKey]) {
+    adviceImageCache[cacheKey] = { urls: [], idx: 0, page: 1, allUrls: [], allCount: 0 };
+  }
+  const cache = adviceImageCache[cacheKey];
+  if (!cache.allUrls) cache.allUrls = [];
+  if (!cache.allCount) cache.allCount = 0;
+  if (cache.urls.length === 0) {
+    cache.urls = await fetchAdviceImages(query, lang, cache.page);
+    cache.idx = 0;
+    // צבירת כל התמונות שהתקבלו עד כה
+    cache.allUrls = cache.allUrls.concat(cache.urls);
+    cache.allCount = cache.allUrls.length;
+  }
+  let imgHtml = '';
+  if (cache.urls.length > 0) {
+    // חישוב אינדקס כולל (לדוג' 11/20)
+    const globalIdx = (cache.page - 1) * 10 + cache.idx + 1;
+    const globalCount = cache.allCount;
+    let indicatorText = `${globalIdx} / ${globalCount}`;
+    if (window.currentDict && window.currentDict.ui && window.currentDict.ui.imageIndicator) {
+      indicatorText = window.currentDict.ui.imageIndicator.replace('{current}', globalIdx).replace('{total}', globalCount);
+    }
+    const imgUrl = cache.urls[cache.idx];
+    // תמיד מחליפים innerHTML, אין צורך לבדוק אם יש כבר section-img-bg
+    imgHtml = `
+      <div class=\"section-img-bg\">\n          <img src=\"${imgUrl}\" alt=\"תמונה רלוונטית לתשובה\" class=\"section-img\" style=\"margin-bottom:0.5rem;\" />\n          <div class=\"img-refresh-row\">\n            <button class=\"refresh-img-btn\" aria-label=\"רענן תמונה\" title=\"רענן תמונה\">🔄</button>\n            <div class=\"img-indicator\" aria-live=\"polite\">${indicatorText}</div>\n          </div>\n        </div>\n      `;
+    adviceOutput.innerHTML =
+      advice +
+      imgHtml +
+      '<div style=\"font-size:0.9em;color:#888\">Images from <a href=\"https://pixabay.com/\" target=\"_blank\" rel=\"noopener\">Pixabay</a></div>';
+    setupAdviceRefreshBtn(userPrompt, lang);
+    return;
+  } else {
+    // אין תמונה – הצג רק שורת רענון והודעה
+    imgHtml = `
+      <div class=\"section-img-bg\">\n        <div class=\"img-refresh-row\">\n          <button class=\"refresh-img-btn\" aria-label=\"רענן תמונה\" title=\"רענן תמונה\">🔄</button>\n          <div class=\"img-indicator\" aria-live=\"polite\">0 / 0</div>\n        </div>\n      </div>\n      <div style=\"color:#888\">לא נמצאה תמונה מתאימה</div>\n    `;
+    adviceOutput.innerHTML =
+      advice +
+      imgHtml +
+      '<div style=\"font-size:0.9em;color:#888\">Images from <a href=\"https://pixabay.com/\" target=\"_blank\" rel=\"noopener\">Pixabay</a></div>';
+    setupAdviceRefreshBtn(userPrompt, lang);
+    return;
+  }
+  // אם לא היה צורך להחליף innerHTML, עדיין צריך לעדכן את כפתור הרענון
+  setupAdviceRefreshBtn(userPrompt, lang);
+}
+function setupAdviceRefreshBtn(userPrompt, lang) {
+  const btn = adviceOutput.querySelector('.refresh-img-btn');
+  if (!btn) return;
+  btn.onclick = null;
+  btn.addEventListener('click', async function(e) {
+    if (globalRefreshLocked) {
+      showAdviceToast('הפעולה נחסמה זמנית עקב רענונים מרובים. נסה שוב בעוד 2 דקות.');
+      return;
+    }
+    if (!canRefreshImageGlobal()) {
+      return;
+    }
+    const query = getPixabayQuery(userPrompt, lang);
+    const cacheKey = getAdviceCacheKey(userPrompt, lang);
+    if (!adviceImageCache[cacheKey]) {
+      adviceImageCache[cacheKey] = { urls: [], idx: 0, page: 1, allUrls: [], allCount: 0 };
+    }
+    const cache = adviceImageCache[cacheKey];
+    cache.idx++;
+    if (cache.idx >= cache.urls.length) {
+      cache.page++;
+      const newUrls = await fetchAdviceImages(query, lang, cache.page);
+      if (newUrls.length > 0) {
+        cache.urls = newUrls;
+        cache.idx = 0;
+        // צבירת כל התמונות שהתקבלו עד כה
+        cache.allUrls = cache.allUrls.concat(newUrls);
+        cache.allCount = cache.allUrls.length;
+      } else {
+        cache.idx = 0;
+      }
+    }
+    // רנדר מחדש
+    renderAdviceOutput(window.lastAdviceText, userPrompt, lang);
+  });
+}
+
 getAdviceBtn.addEventListener('click', async () => {
   const userPrompt = scenarioInput.value.trim();
   const askerType = document.getElementById('askerType').value;
@@ -658,12 +970,8 @@ getAdviceBtn.addEventListener('click', async () => {
   getAdviceBtn.disabled = true;
   setTimeout(async () => {
     const advice = window.getMockAdvice(userPrompt, askerType, askerAge, gender);
-    const query = getPixabayQuery(userPrompt, window.currentLang);
-    const imgUrl = await getPixabayImageUrl(query, window.currentLang);
-    adviceOutput.innerHTML =
-      advice +
-      (imgUrl ? `<img src="${imgUrl}" alt="תמונה רלוונטית לתשובה" class="section-img" />` : '<div style="color:#888">לא נמצאה תמונה מתאימה</div>') +
-      '<div style="font-size:0.9em;color:#888">Images from <a href="https://pixabay.com/" target="_blank" rel="noopener">Pixabay</a></div>';
+    window.lastAdviceText = advice;
+    await renderAdviceOutput(advice, userPrompt, window.currentLang);
     loadingSpinner.style.display = 'none';
     adviceOutput.style.display = 'block';
     getAdviceBtn.disabled = false;
@@ -695,6 +1003,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   setupTTSButtons();
   setupAdviceTTSButton();
+  setupRefreshImageButtons(); // Call setupRefreshImageButtons here
   // ודא הצגת בועית 'אין קול עברי' גם בטעינה ראשונה
   setTimeout(() => {
     if (window.currentLang === 'he') {

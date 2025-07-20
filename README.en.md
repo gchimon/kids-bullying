@@ -154,6 +154,19 @@ kids-bullying/
 
 ---
 
+## 🛡️ Image Refresh Protection (User-Friendly)
+
+All image refresh buttons (🔄) – for section illustrations and personalized advice – are protected by a smart global rate limiter:
+- 🔄 If you click any refresh button more than 5 times in 10 seconds, a friendly toast message will ask you to slow down, and no new images will be loaded.
+- ⏳ If you refresh more than 15 times in 60 seconds (or 8 in 20 seconds), all refresh buttons are temporarily locked for 2 minutes to protect your Pixabay API credits.
+- ⏳ While locked, any click shows a clear message and does not trigger an API call.
+- ✅ After 2 minutes, the buttons are automatically unlocked and you can refresh again.
+- All messages and indicators are fully translated and accessible in your chosen language.
+
+**Why?** This protects you from accidental or automated overuse, keeps the app fast and fair for everyone, and ensures you never run out of image credits by mistake. The system always provides clear, friendly feedback in your language.
+
+---
+
 ## ♿ Accessibility
 
 - All key elements include tabindex, aria-label, aria-live, dynamic alt text, high contrast, RTL/LTR support, keyboard navigation, graph descriptions, and accessible tabs.

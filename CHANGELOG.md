@@ -1,5 +1,28 @@
 # Changelog – kids-bullying
 
+## [1.2.0] – 2024-07-25
+
+### 🛡️ Global Image Refresh Rate Limit & Anti-Script Protection
+- **Global protection for all image refresh buttons (sections & personalized advice):**
+  - If the user clicks any refresh button more than 5 times in 10 seconds, a warning is shown and no API call is made.
+  - If more than 15 refreshes in 60 seconds, or 8 in 20 seconds, all refresh buttons are locked for 2 minutes (to prevent abuse or scripts from draining API credits).
+  - While locked, any click shows a toast message and does not trigger an API call.
+  - After 2 minutes, the buttons are automatically unlocked.
+- **One unified mechanism** protects all image refreshes, with clear user feedback.
+- **Purpose:** Prevents accidental or scripted abuse of the Pixabay API and protects user API credits.
+
+## [1.1.0] – 2024-07-25
+
+### 🚀 Text-to-Speech (TTS) Experience Upgrade
+- Modern popup TTS player with soft colors, round buttons, and subtle shadows.
+- Voice selection for all available voices (male/female), with automatic preference saving.
+- Accessible sliders for speech rate and pitch, with localStorage persistence.
+- Full RTL/LTR support, ARIA, keyboard navigation, and button descriptions.
+- Hebrew voice warning: clear message with install instructions if no Hebrew TTS is available.
+- Playback starts only when Play is pressed (not automatic).
+- Fully responsive design.
+- Ready for future Canvas-based UI/animations.
+
 ## [1.0.0] – 2024-07-25
 
 ### 🎉 Initial Release
@@ -36,29 +59,6 @@ kids-bullying/
 - **RTL/LTR support**
 - **Keyboard navigation**
 
-### 🗣️ Text-to-Speech (TTS) Experience Upgrade (July 2024)
-- Animated speaker icon and visual feedback while speaking.
-- TTS buttons are toggleable: click again to stop, or click another to switch.
-- Only one section/advice can be read at a time.
-- Added accessible sliders for speech rate and pitch, with localStorage persistence.
-- All TTS features are fully accessible (ARIA, keyboard, focus, color contrast).
-- Hebrew voice warning: gentle, accessible message with install instructions if no Hebrew TTS is available.
-- All features work in Hebrew, English, and French (subject to browser TTS support).
-- See README for usage details.
-
 ---
 
 For full documentation, setup instructions, and theoretical background, see the README files. 
-
-## [1.1.0] – 2024-07-25
-
-### 🚀 שדרוג נגן טקסט מדובר (TTS)
-- **נגן Popup חדשני**: נגן TTS עצמאי, ממורכז, עם עיצוב מודרני, צבעים רכים, כפתורים עגולים, וצללים עדינים.
-- **בחירת קול (Voice)**: תפריט בחירה של כל הקולות הזמינים לשפה (כולל גבר/אישה), עם שמירה אוטומטית של ההעדפה.
-- **סליידרים מהירות וטון**: שליטה מלאה, שמירה ב-localStorage.
-- **תמיכה מלאה ב-RTL/LTR**: כל הממשק, כולל תוויות, כפתורים, ותפריטים.
-- **נגישות גבוהה**: ARIA, פוקוס, ניווט מקלדת, תיאורי כפתורים.
-- **הודעה מותאמת אם אין קול עברי**: הסבר בעברית עם הוראות התקנה, במקום הנגן.
-- **הפעלה רק בלחיצה על Play**: לא מתחיל אוטומטית.
-- **עיצוב רספונסיבי**: מתאים לנייד ודסקטופ.
-- **הכנה להרחבה עתידית ל-Canvas**: ניתן להוסיף בעתיד נגן Canvas עם אנימציות. 

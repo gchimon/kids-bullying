@@ -128,6 +128,19 @@ kids-bullying/
 
 ---
 
+## 🛡️ Protection du rafraîchissement des images (Conviviale)
+
+Tous les boutons de rafraîchissement d'image (🔄) – pour les illustrations de section et les conseils personnalisés – sont protégés par une limitation globale intelligente :
+- 🔄 Si vous cliquez sur un bouton de rafraîchissement plus de 5 fois en 10 secondes, un message toast convivial vous demandera de ralentir et aucune nouvelle image ne sera chargée.
+- ⏳ Si vous rafraîchissez plus de 15 fois en 60 secondes (ou 8 en 20 secondes), tous les boutons de rafraîchissement sont temporairement verrouillés pendant 2 minutes pour protéger vos crédits API Pixabay.
+- ⏳ Pendant le verrouillage, chaque clic affiche un message clair et ne déclenche pas d'appel API.
+- ✅ Après 2 minutes, les boutons sont automatiquement déverrouillés et vous pouvez rafraîchir à nouveau.
+- Tous les messages et indicateurs sont entièrement traduits et accessibles dans la langue de votre choix.
+
+**Pourquoi ?** Cela vous protège contre une utilisation accidentelle ou automatisée excessive, garde l'application rapide et équitable pour tous, et garantit que vous ne manquerez jamais de crédits d'image par erreur. Le système fournit toujours un retour clair et convivial dans votre langue.
+
+---
+
 ## ♿ Accessibilité
 
 - Tous les éléments incluent tabindex, aria-label, aria-live, textes alternatifs dynamiques, contraste élevé, support RTL/LTR, navigation clavier, descriptions de graphiques, et onglets accessibles.
