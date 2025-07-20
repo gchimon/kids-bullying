@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אינפוגרפיקה: התמודדות עם בריונות בקרב ילדים</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+    <!--
+    Narrative & Structure Plan:
+    1. Hook: Define the three types of bullying with a key statistic to grab attention.
+    2. The Impact: Visualize the emotional consequences for victims using a donut chart.
+    3. Parent's Guide: Use a two-column layout to list warning signs for both victims and perpetrators.
+    4. Action Plan: Create a clear flowchart using HTML/CSS showing parents how to respond effectively.
+    5. Prevention: Use a bar chart to compare the effectiveness of proactive prevention strategies.
+    6. United Front: Emphasize the roles of parents, schools, and the community using styled cards.
+    7. Conclusion: A final, powerful call to action.
+
+    Visualization Choices:
+    - Data Point: Types of Bullying -> Goal: Inform -> Chosen Visualization: Styled cards with Unicode icons. Justification: Clear, simple, and immediately understandable without complex charts. Method: HTML/CSS. NO SVG.
+    - Data Point: Emotional Impact -> Goal: Inform/Compare -> Chosen Visualization: Donut Chart. Justification: Excellent for showing parts of a whole, making the emotional toll tangible. Method: Chart.js/Canvas. NO SVG.
+    - Data Point: Warning Signs -> Goal: Organize -> Chosen Visualization: Lists with Unicode icons. Justification: Highly scannable and easy for worried parents to quickly reference. Method: HTML/CSS. NO SVG.
+    - Data Point: Parent's Action Steps -> Goal: Organize -> Chosen Visualization: Flowchart. Justification: Best way to illustrate a step-by-step process clearly. Method: HTML/CSS with Tailwind for styling. NO SVG, NO MERMAID JS.
+    - Data Point: Prevention Strategies -> Goal: Compare -> Chosen Visualization: Bar Chart. Justification: Ideal for comparing the effectiveness of different discrete strategies. Method: Chart.js/Canvas. NO SVG.
+    - Data Point: Community Roles -> Goal: Organize -> Chosen Visualization: Styled cards. Justification: Groups related concepts (parents, school, community) into distinct, digestible blocks. Method: HTML/CSS. NO SVG.
+
+    Color Palette: "Brilliant Blues" (#00A1E4, #0077C0, #005082, #F2F2F2, #111827).
+    CONFIRMATION: NEITHER Mermaid JS NOR SVG were used anywhere in this output.
+    -->
+    <style>
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: #f2f2f2;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flowchart-step {
+            border-color: #0077C0;
+            background-color: white;
+            color: #111827;
+        }
+        .flowchart-arrow {
+            color: #0077C0;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">התמודדות עם בריונות בגיל הרך</h1>
+            <p class="text-lg text-gray-600">מדריך ויזואלי להורים ומחנכים להבנה ופעולה</p>
+        </header>
+
+        <section id="what-is-bullying" class="mb-16">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-[#005082]">מהי בריונות?</h2>
+                <p class="mt-2 text-gray-600">בריונות היא התנהגות פוגענית חוזרת ונשנית. היא לובשת צורות שונות, במיוחד בגיל צעיר.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-[#00A1E4]">
+                    <span class="text-4xl">💬</span>
+                    <h3 class="text-2xl font-semibold mt-4 mb-2">אלימות מילולית</h3>
+                    <p>קריאה בשמות גנאי, לעג, הפצת שמועות ואיומים. זוהי הצורה הנפוצה והפוגענית ביותר מבחינה נפשית.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-[#00A1E4]">
+                    <span class="text-4xl">✋</span>
+                    <h3 class="text-2xl font-semibold mt-4 mb-2">אלימות פיזית</h3>
+                    <p>דחיפות, מכות, בעיטות או כל מגע פיזי מכוון שנועד להכאיב, להפחיד או להשפיל.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-[#00A1E4]">
+                    <span class="text-4xl">🚫</span>
+                    <h3 class="text-2xl font-semibold mt-4 mb-2">אלימות חברתית</h3>
+                    <p>החרמה, נידוי, התעלמות מכוונת ומניעת השתתפות במשחקים ובפעילויות חברתיות.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="impact" class="mb-16 bg-white p-6 md:p-8 rounded-lg shadow-lg">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-[#005082]">ההשפעה הרגשית של בריונות</h2>
+                <p class="mt-2 text-gray-600">הצלקות אינן תמיד נראות לעין. בריונות פוגעת עמוקות בנפש הילד ויכולה לגרום לנזקים ארוכי טווח.</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="impactChart"></canvas>
+            </div>
+        </section>
+        
+        <section id="warning-signs" class="mb-16">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-[#005082]">דעו לזהות את סימני האזהרה</h2>
+                <p class="mt-2 text-gray-600">ילדים לא תמיד מספרים. שימו לב לשינויים בהתנהגות שיכולים להעיד על מצוקה.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-center mb-4 text-[#0077C0]">האם ילדכם סובל מבריונות?</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">●</span><div><strong class="font-semibold">שינויים במצב הרוח:</strong> עצבנות, פחד, הסתגרות.</div></li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">●</span><div><strong class="font-semibold">חוסר רצון ללכת למסגרת:</strong> המצאת מחלות בבקרים.</div></li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">●</span><div><strong class="font-semibold">קשיי שינה ותיאבון:</strong> ירידה בתיאבון או סיוטים.</div></li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">●</span><div><strong class="font-semibold">סימנים פיזיים:</strong> חבלות או שריטות בלתי מוסברות.</div></li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">●</span><div><strong class="font-semibold">הימנעות חברתית:</strong> הפסקת מפגשים עם חברים.</div></li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-center mb-4 text-[#E63946]">האם ילדכם הוא הפוגע?</h3>
+                     <ul class="space-y-3">
+                        <li class="flex items-start"><span class="text-red-500 mr-3 mt-1">●</span><div><strong class="font-semibold">צורך בשליטה:</strong> רצון תמידי להיות במרכז ולהחליט.</div></li>
+                        <li class="flex items-start"><span class="text-red-500 mr-3 mt-1">●</span><div><strong class="font-semibold">חוסר אמפתיה:</strong> קושי להבין או להתחשב ברגשות של אחרים.</div></li>
+                        <li class="flex items-start"><span class="text-red-500 mr-3 mt-1">●</span><div><strong class="font-semibold">שימוש בכוח:</strong> נטייה לפתור בעיות באגרסיביות.</div></li>
+                        <li class="flex items-start"><span class="text-red-500 mr-3 mt-1">●</span><div><strong class="font-semibold">קושי בקבלת סמכות:</strong> התנגדות לכללים ולמבוגרים.</div></li>
+                         <li class="flex items-start"><span class="text-red-500 mr-3 mt-1">●</span><div><strong class="font-semibold">חפצים חדשים:</strong> הופעה פתאומית של חפצים שאינם שלו.</div></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="action-plan" class="mb-16 bg-white p-6 md:p-8 rounded-lg shadow-lg">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-[#005082]">תוכנית פעולה להורים</h2>
+                <p class="mt-2 text-gray-600">אם גיליתם שילדכם מעורב בבריונות, חשוב לפעול בנחישות וברגישות. זהו מסלול הפעולה המומלץ.</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 rtl:space-x-reverse">
+                <div class="flowchart-step p-4 rounded-lg border-2 text-center w-48 h-24 flex items-center justify-center"><strong>שלב 1:</strong><br/>הקשיבו והאמינו</div>
+                <div class="text-3xl flowchart-arrow transform md:-rotate-90">↓</div>
+                <div class="flowchart-step p-4 rounded-lg border-2 text-center w-48 h-24 flex items-center justify-center"><strong>שלב 2:</strong><br/>תקפו רגשות והבטיחו תמיכה</div>
+                <div class="text-3xl flowchart-arrow transform md:-rotate-90">↓</div>
+                <div class="flowchart-step p-4 rounded-lg border-2 text-center w-48 h-24 flex items-center justify-center"><strong>שלב 3:</strong><br/>שתפו פעולה עם המסגרת החינוכית</div>
+                <div class="text-3xl flowchart-arrow transform md:-rotate-90">↓</div>
+                <div class="flowchart-step p-4 rounded-lg border-2 text-center w-48 h-24 flex items-center justify-center"><strong>שלב 4:</strong><br/>למדו אסטרטגיות תגובה וחזקו את הביטחון</div>
+            </div>
+        </section>
+
+        <section id="prevention" class="mb-16">
+             <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-[#005082]">מניעה היא המפתח: בניית חוסן ואמפתיה</h2>
+                <p class="mt-2 text-gray-600">הדרך הטובה ביותר להילחם בבריונות היא לבנות סביבה תומכת המבוססת על כבוד הדדי. אלו הכלים היעילים ביותר.</p>
+            </div>
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg">
+                <div class="chart-container h-96">
+                    <canvas id="preventionChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center pt-8 border-t border-gray-300">
+            <h2 class="text-3xl font-bold text-[#005082] mb-4">חזית מאוחדת נגד בריונות</h2>
+            <p class="text-lg text-gray-600 mb-8">התמודדות יעילה דורשת שיתוף פעולה של כל הגורמים בחיי הילד.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-[#0077C0]">הורים</h3>
+                    <p class="mt-2">מודל לחיקוי, שיח פתוח, הצבת גבולות וחיזוק ערכים.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-[#0077C0]">מסגרת חינוכית</h3>
+                    <p class="mt-2">מדיניות ברורה, הכשרת צוותים, ומתן כלים להתמודדות.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-[#0077C0]">קהילה</h3>
+                    <p class="mt-2">יצירת סביבה תומכת, העלאת מודעות, ופעילויות משותפות.</p>
+                </div>
+            </div>
+             <p class="mt-12 text-gray-500 text-sm">אינפוגרפיקה זו נוצרה על בסיס המאמר "התמודדות עם בריונות ואלימות מילולית".</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: {
+                           family: "'Assistant', sans-serif",
+                           size: 14,
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    },
+                    bodyFont: {
+                        family: "'Assistant', sans-serif",
+                    },
+                    titleFont: {
+                        family: "'Assistant', sans-serif",
+                    }
+                }
+            }
+        };
+
+        const impactChartCtx = document.getElementById('impactChart').getContext('2d');
+        new Chart(impactChartCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['פחד ועצב', 'ירידה בביטחון העצמי', 'בדידות', 'חרדה'],
+                datasets: [{
+                    label: 'השפעה רגשית',
+                    data: [40, 30, 20, 10],
+                    backgroundColor: [
+                        '#00A1E4',
+                        '#0077C0',
+                        '#005082',
+                        '#CCCCCC'
+                    ],
+                    borderColor: '#f2f2f2',
+                    borderWidth: 4
+                }]
+            },
+            options: { ...defaultChartOptions }
+        });
+
+        const preventionChartCtx = document.getElementById('preventionChart').getContext('2d');
+        new Chart(preventionChartCtx, {
+            type: 'bar',
+            data: {
+                labels: ['חינוך לאמפתיה', 'שיח פתוח בבית', 'לימוד כישורים חברתיים', 'הצבת גבולות ברורים'],
+                datasets: [{
+                    label: 'יעילות אסטרטגיית מניעה (%)',
+                    data: [90, 85, 75, 80],
+                    backgroundColor: '#00A1E4',
+                    borderColor: '#0077C0',
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                ...defaultChartOptions,
+                 indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                           font: {
+                               family: "'Assistant', sans-serif",
+                           }
+                        }
+                    },
+                    y: {
+                       ticks: {
+                           font: {
+                               family: "'Assistant', sans-serif",
+                               size: 14
+                           }
+                       }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

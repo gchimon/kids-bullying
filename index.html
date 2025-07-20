@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="he" dir="auto" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מדריך אינטראקטיבי: התמודדות עם בריונות בגיל הרך</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony (Background: #FDFBF6, Text: #3C3C3C, Primary Accent: #7F9F80, Secondary Accent: #A7C4A8, Subtle Highlight: #D4E2D4) -->
+    <!-- Application Structure Plan: The SPA is designed as a guided journey for parents, moving from awareness to action. 1) **Define**: Visually distinct cards explain the types of bullying. 2) **Identify**: An interactive section with tabs for "Victim" and "Bully" signs allows for focused self-assessment. 3) **Understand**: A donut chart visualizes the emotional impact. 4) **Act**: A clear, step-by-step flowchart provides an immediate action plan. 5) **Prevent**: A bar chart compares prevention strategies to empower long-term change. 6) **Personalize**: A Gemini API-powered section offers tailored advice for specific user scenarios, making the guide truly interactive and personal. 7) **Unite**: The conclusion emphasizes the community role. This structure organizes the dense report into a user-centric, actionable tool. -->
+    <!-- Visualization & Content Choices: 
+        Report Info: Types of Bullying -> Goal: Inform -> Viz/Presentation: Styled cards with Unicode icons. Interaction: None. Justification: Quick, scannable overview. Library/Method: HTML/Tailwind. CONFIRMING: NO SVG/Mermaid.
+        Report Info: Warning Signs -> Goal: Organize/Interact -> Viz/Presentation: Tabbed content area showing lists. Interaction: User clicks tabs ('Victim'/'Bully') to switch views. Justification: Prevents information overload and allows users to focus on their specific concern. Library/Method: HTML/Tailwind/JS. CONFIRMING: NO SVG/Mermaid.
+        Report Info: Emotional Impact -> Goal: Inform -> Viz/Presentation: Donut Chart. Interaction: Hover to see details. Justification: Tangibly represents the proportions of emotional harm. Library/Method: Chart.js/Canvas. CONFIRMING: NO SVG/Mermaid.
+        Report Info: Parent Action Steps -> Goal: Organize -> Viz/Presentation: HTML/CSS vertical flowchart. Interaction: None. Justification: Clearly visualizes the required process. Library/Method: HTML/Tailwind. CONFIRMING: NO SVG/Mermaid.
+        Report Info: Prevention Strategy Efficacy -> Goal: Compare -> Viz/Presentation: Horizontal Bar Chart. Interaction: Hover to see details. Justification: Effectively compares different proactive measures. Library/Method: Chart.js/Canvas. CONFIRMING: NO SVG/Mermaid.
+        Report Info: Custom Scenarios -> Goal: Interact/Inform -> Viz/Presentation: Text input, button, output area. Interaction: User input triggers Gemini API call. Justification: Provides high-value, personalized, actionable advice. Library/Method: Gemini API/JS/Fetch. CONFIRMING: NO SVG/Mermaid.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- מנוע העצות פועל מקומית (ללא AI חיצוני, ללא רישום) -->
+    <script src="mock_advice.js"></script>
+</head>
+<body class="bg-[#FDFBF6] text-[#3C3C3C]">
+
+  <div class="container mx-auto px-4 md:px-8 max-w-5xl">
+    <!-- Language Switcher - now centered and above the main title -->
+    <div class="flex justify-center mt-6 mb-8">
+      <div class="lang-switcher flex gap-2" role="group" aria-label="Language selector">
+        <button class="lang-btn" data-lang="he" aria-label="עברית" title="עברית (Hebrew)" tabindex="0">
+          🇮🇱 <span class="ml-1 font-bold hidden sm:inline">עברית</span>
+        </button>
+        <button class="lang-btn" data-lang="en" aria-label="English" title="English" tabindex="0">
+          🇬🇧 <span class="ml-1 font-bold hidden sm:inline">English</span>
+        </button>
+        <button class="lang-btn" data-lang="fr" aria-label="Français" title="Français" tabindex="0">
+          🇫🇷 <span class="ml-1 font-bold hidden sm:inline">Français</span>
+        </button>
+      </div>
+    </div>
+    <header class="text-center mb-12">
+        <h1 class="header-title" id="main-title" tabindex="0">המדריך האינטראקטיבי להתמודדות עם בריונות</h1>
+        <p class="subtitle text-lg text-gray-600" id="main-subtitle">כלים, זיהוי ופעולה להורים וילדים בגיל הרך</p>
+    </header>
+    <div class="flex justify-center gap-4 mb-12">
+      <a href="gov_resources.html" class="bg-[#A7C4A8] text-[#3C3C3C] px-5 py-2 rounded-lg font-semibold hover:bg-[#7F9F80] transition" id="link-gov">מידע ממשלתי וקישורים</a>
+      <a href="info.html" class="bg-[#A7C4A8] text-[#3C3C3C] px-5 py-2 rounded-lg font-semibold hover:bg-[#7F9F80] transition" id="link-info">אינפוגרפיקה: התמודדות עם בריונות</a>
+    </div>
+
+        <section id="define" class="mb-16 card" tabindex="0" aria-label="סוגי בריונות">
+            <div id="section-img-define"></div>
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold" style="color:#00A1E4;" id="define-title">צעד 1: זיהוי הבעיה</h2>
+                <p class="mt-2 text-gray-600" id="define-desc">בריונות אינה משחק ילדים. היא פגיעה מכוונת וחוזרת. החלק הראשון יעזור לכם להבין את הצורות השונות שהיא לובשת.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="card" tabindex="0" aria-label="אלימות מילולית">
+                    <div class="emoji-icon">💬</div>
+                    <h3 class="text-2xl font-semibold mt-2 mb-2" style="color:#0077C0;" id="define-card1-title">אלימות מילולית</h3>
+                    <p id="define-card1-desc">קריאה בשמות גנאי, לעג, איומים או הפצת שמועות פוגעניות.</p>
+                </div>
+                <div class="card" tabindex="0" aria-label="אלימות פיזית">
+                    <div class="emoji-icon">✋</div>
+                    <h3 class="text-2xl font-semibold mt-2 mb-2" style="color:#0077C0;" id="define-card2-title">אלימות פיזית</h3>
+                    <p id="define-card2-desc">דחיפות, מכות, משיכות או כל מגע פיזי שנועד להכאיב ולהשפיל.</p>
+                </div>
+                <div class="card" tabindex="0" aria-label="חרם חברתי">
+                    <div class="emoji-icon">🚫</div>
+                    <h3 class="text-2xl font-semibold mt-2 mb-2" style="color:#0077C0;" id="define-card3-title">חרם חברתי</h3>
+                    <p id="define-card3-desc">נידוי מכוון, התעלמות, או מניעה מילד להצטרף למשחק או פעילות.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="identify" class="mb-16 card" tabindex="0" aria-label="סימני אזהרה">
+            <div id="section-img-identify"></div>
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold" style="color:#00A1E4;" id="identify-title">צעד 2: שימו לב לסימנים</h2>
+                <p class="mt-2 text-gray-600" id="identify-desc">ילדים לא תמיד משתפים. חשוב להיות ערניים לשינויים בהתנהגותם. השתמשו בלשוניות כדי לבחון סימני אזהרה אצל ילדכם.</p>
+            </div>
+            <div>
+                <div class="tab-bar border-b mb-6" role="tablist">
+                    <div id="tab-victim" class="tab active" role="tab" aria-selected="true" tabindex="0" aria-controls="content-victim">סימנים שהילד נפגע</div>
+                    <div id="tab-bully" class="tab" role="tab" aria-selected="false" tabindex="0" aria-controls="content-bully">סימנים שהילד פוגע</div>
+                </div>
+                <div id="content-victim" role="tabpanel" aria-labelledby="tab-victim">
+                    <ul class="space-y-3 list-inside">
+                        <li class="flex items-start" id="victim-sign1"><span class="text-[#00A1E4] text-xl mr-3 rtl:ml-3 rtl:mr-0">›</span>ירידה פתאומית בביטחון העצמי והסתגרות.</li>
+                        <li class="flex items-start" id="victim-sign2"><span class="text-[#00A1E4] text-xl mr-3 rtl:ml-3 rtl:mr-0">›</span>חוסר רצון ללכת למסגרת החינוכית ותלונות על כאבים.</li>
+                        <li class="flex items-start" id="victim-sign3"><span class="text-[#00A1E4] text-xl mr-3 rtl:ml-3 rtl:mr-0">›</span>קשיי שינה, סיוטים או שינויים בתיאבון.</li>
+                        <li class="flex items-start" id="victim-sign4"><span class="text-[#00A1E4] text-xl mr-3 rtl:ml-3 rtl:mr-0">›</span>אובדן חפצים, בגדים קרועים או סימנים פיזיים לא מוסברים.</li>
+                    </ul>
+                </div>
+                <div id="content-bully" class="hidden" role="tabpanel" aria-labelledby="tab-bully">
+                    <ul class="space-y-3 list-inside">
+                        <li class="flex items-start" id="bully-sign1"><span class="text-[#E63946] text-xl mr-3 rtl:ml-3 rtl:mr-0">›</span>צורך חזק בשליטה ורצון להיות במרכז תשומת הלב.</li>
+                        <li class="flex items-start" id="bully-sign2"><span class="text-[#E63946] text-xl mr-3 rtl:ml-3 rtl:mr-0">›</span>קושי להביע אמפתיה ונטייה לזלזל ברגשות אחרים.</li>
+                        <li class="flex items-start" id="bully-sign3"><span class="text-[#E63946] text-xl mr-3 rtl:ml-3 rtl:mr-0">›</span>שימוש באגרסיביות (מילולית או פיזית) כדי לפתור קונפליקטים.</li>
+                        <li class="flex items-start" id="bully-sign4"><span class="text-[#E63946] text-xl mr-3 rtl:ml-3 rtl:mr-0">›</span>התנהגות תוקפנית כלפי אחים, חיות מחמד או חברים.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="understand" class="mb-16 card" tabindex="0" aria-label="השפעה רגשית">
+            <div id="section-img-understand"></div>
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold" style="color:#00A1E4;" id="understand-title">צעד 3: הבנת ההשפעה</h2>
+                <p class="mt-2 text-gray-600" id="understand-desc">הצלקות אינן תמיד נראות לעין. התרשים ממחיש את ההשפעות הרגשיות הנפוצות שילדים חווים בעקבות בריונות.</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="impactChart" aria-label="תרשים השפעה רגשית" tabindex="0"></canvas>
+            </div>
+        </section>
+
+        <section id="act" class="mb-16 card" tabindex="0" aria-label="תוכנית פעולה להורים">
+            <div id="section-img-act"></div>
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold" style="color:#00A1E4;" id="act-title">צעד 4: תוכנית פעולה להורים</h2>
+                <p class="mt-2 text-gray-600" id="act-desc">אם זיהיתם בעיה, חשוב לפעול בנחישות וברגישות. עקבו אחר הצעדים הבאים להתמודדות יעילה.</p>
+            </div>
+            <div class="flex flex-col items-center justify-center space-y-4 md:flex-row md:space-y-0 md:space-x-4 rtl:space-x-reverse">
+                <div class="flowchart-step" tabindex="0" aria-label="האזינו והאמינו" id="act-step1"><strong>1. האזינו והאמינו:</strong><br/>צרו מרחב בטוח לשיחה, תנו לילד לדבר והאמינו לו ללא שיפוטיות.</div>
+                <div class="flowchart-arrow" aria-hidden="true">↓</div>
+                <div class="flowchart-step" tabindex="0" aria-label="תקפו רגשות ותמכו" id="act-step2"><strong>2. תקפו רגשות ותמכו:</strong><br/>אמרו "אני מבין שכעסת/נפגעת" והבטיחו שאתם שם כדי לעזור.</div>
+                <div class="flowchart-arrow" aria-hidden="true">↓</div>
+                <div class="flowchart-step" tabindex="0" aria-label="שתפו פעולה עם המסגרת" id="act-step3"><strong>3. שתפו פעולה עם המסגרת:</strong><br/>צרו קשר עם הגננת/המורה, תארו את המצב ופעלו יחד לפתרון.</div>
+                <div class="flowchart-arrow" aria-hidden="true">↓</div>
+                <div class="flowchart-step" tabindex="0" aria-label="חזקו ולמדו אסטרטגיות" id="act-step4"><strong>4. חזקו ולמדו אסטרטגיות:</strong><br/>עודדו פעילויות מחזקות ביטחון ותרגלו תגובות לא אלימות.</div>
+            </div>
+        </section>
+
+        <section id="prevent" class="mb-16 card" tabindex="0" aria-label="מניעת בריונות">
+            <div id="section-img-prevent"></div>
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold" style="color:#00A1E4;" id="prevent-title">צעד 5: מניעה היא המפתח</h2>
+                <p class="mt-2 text-gray-600" id="prevent-desc">הדרך הטובה ביותר להילחם בבריונות היא לבנות סביבה תומכת המבוססת על כבוד. התרשים משווה את יעילותן של אסטרטגיות מניעה שונות.</p>
+            </div>
+            <div class="chart-container h-96">
+                <canvas id="preventionChart" aria-label="תרשים אסטרטגיות מניעה" tabindex="0"></canvas>
+            </div>
+        </section>
+
+        <section id="personalize" class="mb-16 card" tabindex="0" aria-label="עצה מותאמת אישית">
+            <div id="section-img-personalize"></div>
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold" style="color:#00A1E4;" id="personalize-title">צעד 6: קבלו עצה מותאמת אישית ✨</h2>
+                <p class="mt-2 text-gray-600" id="personalize-desc">כל מקרה הוא שונה. תארו תרחיש ספציפי שאתם מתמודדים איתו, ובחרו מי אתם ומה גיל הילד/ה, כדי לקבל עצה מעשית מותאמת.</p>
+            </div>
+            <div class="flex flex-col md:flex-row gap-4 mb-4">
+              <div>
+                <label for="askerType" class="block mb-1" id="askerType-label">מי השואל?</label>
+                <select id="askerType" class="border rounded p-2">
+                  <option value="parent">הורה</option>
+                  <option value="child">ילד/ה</option>
+                  <option value="teacher">מורה/גננת</option>
+                  <option value="counselor">יועץ/ת</option>
+                </select>
+              </div>
+              <div>
+                <label for="askerAge" class="block mb-1" id="askerAge-label">גיל/כיתה</label>
+                <select id="askerAge" class="border rounded p-2">
+                  <option value="5-6">5-6</option>
+                  <option value="7-8">7-8</option>
+                  <option value="9-10">9-10</option>
+                  <option value="11-13">11-13</option>
+                  <option value="adult">מבוגר</option>
+                </select>
+              </div>
+              <div>
+                <label for="genderSelect" class="block mb-1" id="gender-label">מגדר הילד/ה</label>
+                <select id="genderSelect" class="border rounded p-2">
+                  <option value="male">ילד</option>
+                  <option value="female">ילדה</option>
+                </select>
+              </div>
+            </div>
+            <div class="flex flex-col items-center">
+                <textarea id="scenarioInput" class="w-full md:w-3/4 p-4 mb-4 border border-[#A7C4A8] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7F9F80]" rows="5" placeholder="לדוגמה: 'הבן שלי, בן 6, חזר הביתה עצוב ואמר שחבר שלו לא רוצה לשחק איתו יותר וקורא לו בשמות בהפסקה. מה לעשות?'" aria-label="הכנס תרחיש אישי"></textarea>
+                <button id="getAdviceBtn" class="bg-[#7F9F80] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#6a8b6b] transition duration-300 ease-in-out shadow-md" aria-label="קבלו עצה מותאמת אישית">ייצור עצה מותאמת אישית</button>
+                <div id="loadingSpinner" class="loading-spinner mt-6" aria-live="polite"></div>
+                <div id="adviceOutput" class="mt-8 p-6 bg-[#FDFBF6] rounded-lg border border-[#D4E2D4] w-full md:w-3/4 text-[#3C3C3C] leading-relaxed min-h-[100px] flex items-center justify-center text-center" aria-live="polite">העצה תופיע כאן...</div>
+            </div>
+        </section>
+
+        <footer class="text-center pt-8 border-t border-[#D4E2D4] card" tabindex="0" aria-label="חזית מאוחדת נגד בריונות">
+            <div id="section-img-footer"></div>
+            <h2 class="text-3xl font-bold" style="color:#00A1E4;" id="footer-title">חזית מאוחדת נגד בריונות</h2>
+            <p class="text-lg text-gray-600 mb-8" id="footer-desc">התמודדות יעילה דורשת שיתוף פעולה. לכל אחד מאיתנו - הורים, מחנכים וחברי קהילה - יש תפקיד חשוב ביצירת סביבה בטוחה.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="card" tabindex="0" aria-label="הורים">
+                    <h3 class="text-xl font-semibold" style="color:#0077C0;" id="footer-card1-title">הורים</h3>
+                    <p class="mt-2" id="footer-card1-desc">היו מודל לחיקוי, קיימו שיח פתוח, והציבו גבולות ברורים.</p>
+                </div>
+                <div class="card" tabindex="0" aria-label="מסגרת חינוכית">
+                    <h3 class="text-xl font-semibold" style="color:#0077C0;" id="footer-card2-title">מסגרת חינוכית</h3>
+                    <p class="mt-2" id="footer-card2-desc">קבעו מדיניות ברורה, הכשירו צוותים, וספקו כלים להתמודדות.</p>
+                </div>
+                <div class="card" tabindex="0" aria-label="קהילה">
+                    <h3 class="text-xl font-semibold" style="color:#0077C0;" id="footer-card3-title">קהילה</h3>
+                    <p class="mt-2" id="footer-card3-desc">צרו סביבה תומכת, העלו מודעות, וקדמו פעילויות משותפות.</p>
+                </div>
+            </div>
+             <p class="mt-12 text-gray-500 text-sm" id="footer-credits">אפליקציה זו מבוססת על מאמר מקיף בנושא התמודדות עם בריונות ואלימות מילולית.</p>
+        </footer>
+        <div class="text-center mt-4 mb-8 text-xs text-gray-500" id="credits-bar">
+            <p>תמונות מאתר <a href="https://pixabay.com/" target="_blank" rel="noopener" style="color:#0077C0;">Pixabay</a> | פותח באהבה ❤️ על ידי gchimon | מיפוי, דינמיקה ועזרה: OpenAI ChatGPT</p>
+        </div>
+
+    </div>
+
+    <!-- ודא שטוען config.js לפני script.js -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

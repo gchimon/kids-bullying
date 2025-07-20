@@ -1,0 +1,195 @@
+{
+  "ui": {
+    "title": "Interactive Guide to Coping with Bullying",
+    "subtitle": "Tools, Identification, and Action for Parents and Young Children",
+    "askerType": "Who is asking?",
+    "askerAge": "Age/Class",
+    "parent": "Parent",
+    "child": "Child",
+    "teacher": "Teacher",
+    "counselor": "Counselor",
+    "advicePlaceholder": "For example: 'My 6-year-old son came home sad and said his friend doesn't want to play with him anymore and calls him names at recess. What should I do?'"
+  },
+  "keywords": [
+    { "en": ["bullying", "violence"], "result": "bullying children" },
+    { "en": ["insult", "curse", "mock", "hurtful words"], "result": "verbal bullying children" },
+    { "en": ["ostracism", "isolation", "excluded", "lonely"], "result": "isolation children" },
+    { "en": ["friend", "friends", "friendship"], "result": "friendship children" },
+    { "en": ["fear", "scared"], "result": "fear child" },
+    { "en": ["sad", "sadness", "cry", "depressed"], "result": "sad child" },
+    { "en": ["happy", "happiness"], "result": "happy children" },
+    { "en": ["parent", "parents"], "result": "parent child support" },
+    { "en": ["teacher", "classroom"], "result": "teacher classroom children" },
+    { "en": ["help", "support"], "result": "help children" },
+    { "en": ["community", "society", "neighborhood"], "result": "community children" },
+    { "en": ["child", "children", "boy", "girl"], "result": "children" }
+  ],
+  "advice": {
+    "parent": "Advice for parent: Listen to your child, cooperate with the educational staff, boost self-confidence, and practice empathy.",
+    "child": "Advice for child: Talk to a trusted adult (parent, teacher, counselor), don't deal with it alone, talk to a close friend, seek help if needed.",
+    "teacher": "Advice for teacher: Talk to the child privately, inform the parents, work towards a supportive classroom climate.",
+    "counselor": "Advice for counselor: Hold a sensitive conversation, create an intervention plan, work with the staff for a positive climate."
+  },
+  "adviceRich": {
+    "verbal": {
+      "parent": {
+        "5-6": "<b>Advice for parent of a 5-6 year old:</b><br>1. Explain simply and clearly what bullying is and what is allowed/not allowed.<br>2. Encourage sharing of feelings.<br>3. Contact the kindergarten staff/other parents.<br>4. Strengthen your child's sense of security and self-worth.<br><span style=\"color:#0077C0\">Remember: Words can hurt as much as actions. Emphasize to your child that it is not their fault.</span>",
+        "7-8": "<b>Advice for parent of a 7-8 year old:</b><br>1. Talk at eye level, allow your child to share.<br>2. Practice assertive responses together.<br>3. Encourage extracurricular activities/friends outside of school.<br>4. Involve the educational staff.<br><span style=\"color:#0077C0\">Remember: Words can hurt as much as actions. Emphasize to your child that it is not their fault.</span>",
+        "9-10": "<b>Advice for parent of a 9-10 year old:</b><br>1. Talk at eye level, allow your child to share.<br>2. Practice assertive responses together.<br>3. Encourage extracurricular activities/friends outside of school.<br>4. Involve the educational staff.<br><span style=\"color:#0077C0\">Remember: Words can hurt as much as actions. Emphasize to your child that it is not their fault.</span>",
+        "11-13": "<b>Advice for parent of a teenager:</b><br>1. Keep communication open, without judgment.<br>2. Encourage emotional conversation, independence, and confidence.<br>3. Contact the counselor/teacher if needed.<br>4. Strengthen your child's sense of belonging and self-worth.<br><span style=\"color:#0077C0\">Remember: Words can hurt as much as actions. Emphasize to your child that it is not their fault.</span>",
+        "adult": "<b>Advice for parent/adult:</b><br>1. Be a role model – show empathy, listening, and boundaries.<br>2. Cooperate with the educational staff.<br>3. Encourage open conversation at home.<br>4. Work on prevention and raising awareness.<br><span style=\"color:#0077C0\">Remember: Words can hurt as much as actions. Emphasize to your child that it is not their fault.</span>",
+        "default": "<b>1. Talk to your child:</b> Listen, ask open questions, and show support. Emphasize that you believe them.<br><b>2. Contact the educational staff:</b> Work together to find a solution and ask for follow-up.<br><b>3. Strengthen your child at home:</b> Build self-confidence, practice responses, and encourage social activity.<br><b>4. Teach empathy:</b> Talk about others' feelings and practice peaceful conflict resolution.<br><span style=\"color:#888\">(For a more tailored answer, specify the child's age, case type, and who is asking)</span>"
+      },
+      "child": "<b>Advice for child:</b><br>1. Turn to a trusted adult (parent, teacher, counselor).<br>2. Don't deal with it alone – there is always someone to talk to.<br>3. Try talking to a close friend.<br>4. If you feel in danger – seek help immediately.<br><span style=\"color:#0077C0\">Remember: Words can hurt as much as actions. It's not your fault.</span>",
+      "teacher": "<b>Advice for teacher:</b><br>1. Talk to the child privately, at eye level.<br>2. Inform the parents and counselor.<br>3. Work to create a supportive classroom climate.<br>4. Mediate between children if needed.<br><span style=\"color:#0077C0\">Remember: Words can hurt as much as actions. Emphasize to the child that it is not their fault.</span>",
+      "counselor": "<b>Advice for counselor:</b><br>1. Have a sensitive conversation with the child and parents.<br>2. Create a personal intervention plan.<br>3. Work with the educational staff on a positive climate.<br>4. Include empathy and conflict resolution exercises.<br><span style=\"color:#0077C0\">Remember: Words can hurt as much as actions. Emphasize to the child that it is not their fault.</span>"
+    },
+    "isolation": {
+      "parent": {
+        "5-6": "<b>Advice for parent of a 5-6 year old:</b><br>1. Ask how your child feels, emphasize it's not their fault, and show support. Say: 'You are not alone, we are here for you.'<br>2. Ask the staff to help integrate your child, suggest group activities, and talk about acceptance.<br>3. Encourage playdates outside of school, and practice social skills through play.<br>4. Teach empathy: Talk about the importance of accepting everyone, and practice supportive statements.<br><span style=\"color:#0077C0\">Loneliness is very hard for children. Show empathy and help build social connections.</span>",
+        "7-8": "<b>Advice for parent of a 7-8 year old:</b><br>1. Ask open questions, let your child share without pressure, and show empathy. Emphasize: 'It's not your fault, this happens to many kids.'<br>2. Ask for proactive intervention, class discussion, or mediation.<br>3. Encourage clubs, social activity outside school, and strengthen interests.<br>4. Teach empathy: Talk about accepting others, and practice non-aggressive responses.<br><span style=\"color:#0077C0\">Loneliness is very hard for children. Show empathy and help build social connections.</span>",
+        "9-10": "<b>Advice for parent of a 9-10 year old:</b><br>1. Ask open questions, let your child share without pressure, and show empathy. Emphasize: 'It's not your fault, this happens to many kids.'<br>2. Ask for proactive intervention, class discussion, or mediation.<br>3. Encourage clubs, social activity outside school, and strengthen interests.<br>4. Teach empathy: Talk about accepting others, and practice non-aggressive responses.<br><span style=\"color:#0077C0\">Loneliness is very hard for children. Show empathy and help build social connections.</span>",
+        "11-13": "<b>Advice for parent of a teenager:</b><br>1. Keep communication open, without judgment.<br>2. Encourage emotional conversation, independence, and confidence.<br>3. Contact the counselor/teacher if needed.<br>4. Strengthen your child's sense of belonging and self-worth.<br><span style=\"color:#0077C0\">Loneliness is very hard for children. Show empathy and help build social connections.</span>",
+        "adult": "<b>Advice for parent/adult:</b><br>1. Be a role model – show empathy, listening, and boundaries.<br>2. Cooperate with the educational staff.<br>3. Encourage open conversation at home.<br>4. Work on prevention and raising awareness.<br><span style=\"color:#0077C0\">Loneliness is very hard for children. Show empathy and help build social connections.</span>",
+        "default": "<b>1. Talk to your child:</b> Ask open questions, let them share without pressure, and show empathy. Emphasize: 'It's not your fault, this happens to many kids.'<br><b>2. Contact the educational staff:</b> Ask for proactive intervention, class discussion, or mediation.<br><b>3. Strengthen your child at home:</b> Encourage clubs, social activity outside school, and strengthen interests.<br><b>4. Teach empathy:</b> Talk about accepting others, and practice non-aggressive responses.<br><span style=\"color:#888\">(For a more tailored answer, specify the child's age, case type, and who is asking)</span>"
+      },
+      "child": "<b>Advice for child:</b><br>1. Turn to a trusted adult (parent, teacher, counselor).<br>2. Don't deal with it alone – there is always someone to talk to.<br>3. Try talking to a close friend.<br>4. If you feel lonely – seek help immediately.<br><span style=\"color:#0077C0\">Loneliness is very hard for children. Show empathy and help build social connections.</span>",
+      "teacher": "<b>Advice for teacher:</b><br>1. Talk to the child privately, at eye level.<br>2. Inform the parents and counselor.<br>3. Work to create a supportive classroom climate.<br>4. Mediate between children if needed.<br><span style=\"color:#0077C0\">Loneliness is very hard for children. Show empathy and help build social connections.</span>",
+      "counselor": "<b>Advice for counselor:</b><br>1. Have a sensitive conversation with the child and parents.<br>2. Create a personal intervention plan.<br>3. Work with the educational staff on a positive climate.<br>4. Include empathy and conflict resolution exercises.<br><span style=\"color:#0077C0\">Loneliness is very hard for children. Show empathy and help build social connections.</span>"
+    },
+    "physical": {
+      "parent": {
+        "5-6": "<b>Advice for parent of a 5-6 year old:</b><br>1. Calm your child, ask what happened, and explain the importance of telling an adult about any harm.<br>2. Demand immediate action from the staff, documentation, and discussion with all relevant parties.<br>3. Practice non-violent coping strategies at home, and build self-confidence.<br>4. Teach empathy: Explain that a child who hurts others physically needs help, and practice peaceful conflict resolution.<br><span style=\"color:#0077C0\">Physical harm requires immediate attention. Ensure physical and emotional safety.</span>",
+        "7-8": "<b>Advice for parent of a 7-8 year old:</b><br>1. Allow your child to share, emphasize it's not their fault, and that there is someone to turn to.<br>2. Demand immediate action from the staff, documentation, and discussion with both sides' parents.<br>3. Encourage sports, practice assertive responses, and build self-worth.<br>4. Teach empathy: Talk about others' feelings, and practice conflict resolution.<br><span style=\"color:#0077C0\">Physical harm requires immediate attention. Ensure physical and emotional safety.</span>",
+        "9-10": "<b>Advice for parent of a 9-10 year old:</b><br>1. Allow your child to share, emphasize it's not their fault, and that there is someone to turn to.<br>2. Demand immediate action from the staff, documentation, and discussion with both sides' parents.<br>3. Encourage sports, practice assertive responses, and build self-worth.<br>4. Teach empathy: Talk about others' feelings, and practice conflict resolution.<br><span style=\"color:#0077C0\">Physical harm requires immediate attention. Ensure physical and emotional safety.</span>",
+        "11-13": "<b>Advice for parent of a teenager:</b><br>1. Keep communication open, without judgment.<br>2. Encourage emotional conversation, independence, and confidence.<br>3. Contact the counselor/teacher if needed.<br>4. Strengthen your child's sense of belonging and self-worth.<br><span style=\"color:#0077C0\">Physical harm requires immediate attention. Ensure physical and emotional safety.</span>",
+        "adult": "<b>Advice for parent/adult:</b><br>1. Be a role model – show empathy, listening, and boundaries.<br>2. Cooperate with the educational staff.<br>3. Encourage open conversation at home.<br>4. Work on prevention and raising awareness.<br><span style=\"color:#0077C0\">Physical harm requires immediate attention. Ensure physical and emotional safety.</span>",
+        "default": "<b>1. Talk to your child:</b> Allow them to share, emphasize it's not their fault, and that there is someone to turn to.<br><b>2. Contact the educational staff:</b> Demand immediate action, documentation, and discussion with both sides' parents.<br><b>3. Strengthen your child at home:</b> Encourage sports, practice assertive responses, and build self-worth.<br><b>4. Teach empathy:</b> Talk about others' feelings, and practice conflict resolution.<br><span style=\"color:#888\">(For a more tailored answer, specify the child's age, case type, and who is asking)</span>"
+      },
+      "child": "<b>Advice for child:</b><br>1. Turn to a trusted adult (parent, teacher, counselor).<br>2. Don't deal with it alone – there is always someone to talk to.<br>3. Try talking to a close friend.<br>4. If you feel in danger – seek help immediately.<br><span style=\"color:#0077C0\">Physical harm requires immediate attention. Ensure physical and emotional safety.</span>",
+      "teacher": "<b>Advice for teacher:</b><br>1. Talk to the child privately, at eye level.<br>2. Inform the parents and counselor.<br>3. Work to create a supportive classroom climate.<br>4. Mediate between children if needed.<br><span style=\"color:#0077C0\">Physical harm requires immediate attention. Ensure physical and emotional safety.</span>",
+      "counselor": "<b>Advice for counselor:</b><br>1. Have a sensitive conversation with the child and parents.<br>2. Create a personal intervention plan.<br>3. Work with the educational staff on a positive climate.<br>4. Include empathy and conflict resolution exercises.<br><span style=\"color:#0077C0\">Physical harm requires immediate attention. Ensure physical and emotional safety.</span>"
+    },
+    "bully": {
+      "parent": {
+        "default": "<b>1. Talk to your child:</b> Speak at eye level, try to understand the reasons for the behavior, and explain that words/actions can hurt.<br><b>2. Involve the educational staff:</b> Contact the teacher/counselor, ask for follow-up and support.<br><b>3. Strengthen empathy:</b> Practice empathy with your child, role-play, and explain the importance of friendship.<br><b>4. Set boundaries:</b> Explain that some behaviors are unacceptable, and set clear boundaries at home.<br><span style=\"color:#0077C0\">A child who hurts others needs guidance, boundaries, and empathy.</span>"
+      },
+      "child": "<b>Advice for child:</b><br>1. Understand that words and actions can hurt. Try to imagine how the other child feels.<br>2. Turn to an adult for help.<br>3. Try to apologize and improve your behavior.<br><span style=\"color:#0077C0\">A child who hurts others needs guidance, boundaries, and empathy.</span>",
+      "teacher": "<b>Advice for teacher:</b><br>1. Talk to the child about feelings, reasons for the behavior, and consequences.<br>2. Involve the parents.<br>3. Work on strengthening empathy in the class.<br>4. Set clear boundaries.<br><span style=\"color:#0077C0\">A child who hurts others needs guidance, boundaries, and empathy.</span>",
+      "counselor": "<b>Advice for counselor:</b><br>1. Have a sensitive conversation with the child and parents.<br>2. Create a personal intervention plan.<br>3. Work with the educational staff on a positive climate.<br>4. Include empathy and conflict resolution exercises.<br><span style=\"color:#0077C0\">A child who hurts others needs guidance, boundaries, and empathy.</span>"
+    },
+    "general": {
+      "parent": {
+        "default": "<b>1. Talk to your child:</b> Listen, ask open questions, and show support. Emphasize that you believe them.<br><b>2. Contact the educational staff:</b> Work together to find a solution and ask for follow-up.<br><b>3. Strengthen your child at home:</b> Build self-confidence, practice responses, and encourage social activity.<br><b>4. Teach empathy:</b> Talk about others' feelings and practice peaceful conflict resolution.<br><span style=\"color:#888\">(For a more tailored answer, specify the child's age, case type, and who is asking)</span>"
+      },
+      "child": "<b>Advice for child:</b><br>1. Turn to a trusted adult (parent, teacher, counselor).<br>2. Don't deal with it alone – there is always someone to talk to.<br>3. Try talking to a close friend.<br>4. If you feel in danger – seek help immediately.<br>",
+      "teacher": "<b>Advice for teacher:</b><br>1. Talk to the child privately, at eye level.<br>2. Inform the parents and counselor.<br>3. Work to create a supportive classroom climate.<br>4. Mediate between children if needed.<br>",
+      "counselor": "<b>Advice for counselor:</b><br>1. Have a sensitive conversation with the child and parents.<br>2. Create a personal intervention plan.<br>3. Work with the educational staff on a positive climate.<br>4. Include empathy and conflict resolution exercises.<br>"
+    }
+  },
+  "define": {
+    "title": "Step 1: Identify the Problem",
+    "desc": "Bullying is not child's play. It is intentional and repeated harm. This section helps you understand its different forms.",
+    "card1Title": "Verbal Bullying",
+    "card1Desc": "Name-calling, teasing, threats, or spreading harmful rumors.",
+    "card2Title": "Physical Bullying",
+    "card2Desc": "Pushing, hitting, pulling, or any physical contact meant to hurt or humiliate.",
+    "card3Title": "Social Exclusion",
+    "card3Desc": "Deliberate exclusion, ignoring, or preventing a child from joining games or activities."
+  },
+  "identify": {
+    "title": "Step 2: Watch for Signs",
+    "desc": "Children don't always share. Be alert to changes in their behavior. Use the tabs to check warning signs.",
+    "tabVictim": "Signs the child is a victim",
+    "tabBully": "Signs the child is a bully",
+    "victimSigns": [
+      "Sudden drop in self-confidence and withdrawal.",
+      "Unwillingness to go to school and complaints of pain.",
+      "Sleep problems, nightmares, or changes in appetite.",
+      "Lost belongings, torn clothes, or unexplained physical marks."
+    ],
+    "bullySigns": [
+      "Strong need for control and attention.",
+      "Difficulty showing empathy and tendency to belittle others' feelings.",
+      "Use of aggression (verbal or physical) to resolve conflicts.",
+      "Aggressive behavior towards siblings, pets, or friends."
+    ]
+  },
+  "understand": {
+    "title": "Step 3: Understanding the Impact",
+    "desc": "Scars are not always visible. The chart illustrates the common emotional effects children experience as a result of bullying."
+  },
+  "act": {
+    "title": "Step 4: Action Plan for Parents",
+    "desc": "If you identified a problem, act decisively and sensitively. Follow these steps for effective handling.",
+    "step1": "<strong>1. Listen and Believe:</strong><br/>Create a safe space for conversation, let the child speak, and believe them without judgment.",
+    "step2": "<strong>2. Validate Feelings and Support:</strong><br/>Say 'I understand you were hurt/angry' and assure them you are there to help.",
+    "step3": "<strong>3. Collaborate with the School:</strong><br/>Contact the teacher, describe the situation, and work together for a solution.",
+    "step4": "<strong>4. Strengthen and Teach Strategies:</strong><br/>Encourage confidence-building activities and practice non-violent responses."
+  },
+  "prevent": {
+    "title": "Step 5: Prevention is Key",
+    "desc": "The best way to fight bullying is to build a supportive environment based on respect. The chart compares the effectiveness of different prevention strategies."
+  },
+  "personalize": {
+    "title": "Step 6: Get Personalized Advice ✨",
+    "desc": "Every case is different. Describe a specific scenario you are dealing with, and select who you are and the child's age to get practical, tailored advice."
+  },
+  "footer": {
+    "title": "A United Front Against Bullying",
+    "desc": "Effective coping requires cooperation. Each of us—parents, educators, and community members—has an important role in creating a safe environment.",
+    "card1Title": "Parents",
+    "card1Desc": "Be a role model, maintain open dialogue, and set clear boundaries.",
+    "card2Title": "Educational Framework",
+    "card2Desc": "Set clear policies, train staff, and provide coping tools.",
+    "card3Title": "Community",
+    "card3Desc": "Create a supportive environment, raise awareness, and promote joint activities.",
+    "credits": "This app is based on a comprehensive article on coping with bullying and verbal violence."
+  },
+  "creditsBar": "Images from <a href=\"https://pixabay.com/\" target=\"_blank\" rel=\"noopener\" style=\"color:#0077C0;\">Pixabay</a> | Developer: chimon | Mapping, dynamics & help: OpenAI ChatGPT",
+  "charts": {
+    "impactLabels": [
+      "Fear and Anxiety",
+      "Decreased Self-Confidence",
+      "Loneliness and Sadness",
+      "Anger and Frustration"
+    ],
+    "impactData": [40, 30, 20, 10],
+    "impactAriaLabel": "Emotional Impact Chart",
+    "preventionLabels": [
+      "Empathy Education",
+      "Open Dialogue at Home",
+      "Social Skills Training",
+      "Clear Boundaries"
+    ],
+    "preventionData": [90, 85, 75, 80],
+    "preventionAriaLabel": "Prevention Strategies Chart"
+  },
+  "sectionImages": {
+    "section-img-define": "Illustration: Types of Bullying",
+    "section-img-identify": "Illustration: Warning Signs",
+    "section-img-understand": "Illustration: Emotional Impact",
+    "section-img-act": "Illustration: Parent Action Plan",
+    "section-img-prevent": "Illustration: Bullying Prevention",
+    "section-img-personalize": "Illustration: Personalized Advice",
+    "section-img-footer": "Illustration: United Front Against Bullying"
+  },
+  "aria": {
+    "tabVictim": "Tab: Signs the child is a victim",
+    "tabBully": "Tab: Signs the child is a bully",
+    "adviceOutput": "Personalized advice display area",
+    "getAdviceBtn": "Get personalized advice",
+    "loadingSpinner": "Loading answer...",
+    "footer": "Summary and credits area",
+    "cards": "Information card",
+    "mainNav": "Main navigation",
+    "personalizeForm": "Personalized advice form",
+    "sectionDefine": "Types of Bullying",
+    "sectionIdentify": "Warning Signs",
+    "sectionUnderstand": "Emotional Impact",
+    "sectionAct": "Parent Action Plan",
+    "sectionPrevent": "Bullying Prevention",
+    "sectionPersonalize": "Personalized Advice",
+    "sectionFooter": "United Front Against Bullying"
+  }
+} 

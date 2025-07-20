@@ -1,0 +1,200 @@
+body {
+    font-family: 'Assistant', sans-serif;
+    background: linear-gradient(135deg, #F2F2F2 0%, #E3F6FF 100%);
+    color: #111827;
+    min-height: 100vh;
+}
+
+.header-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #005082;
+    letter-spacing: 1px;
+    margin-bottom: 0.5em;
+}
+
+.tab-bar {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    background: #fff;
+    border-radius: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    padding: 0.5rem 0;
+}
+
+.tab {
+    cursor: pointer;
+    padding: 0.75rem 2rem;
+    border-bottom: 3px solid transparent;
+    border-radius: 2rem;
+    font-size: 1.1rem;
+    color: #0077C0;
+    font-weight: 600;
+    transition: all 0.3s;
+    outline: none;
+}
+.tab:focus {
+    box-shadow: 0 0 0 2px #00A1E4;
+}
+.tab.active, .tab:hover {
+    border-bottom: 3px solid #00A1E4;
+    background: #E3F6FF;
+    color: #005082;
+}
+
+.card {
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 16px rgba(0,161,228,0.08);
+    border-top: 5px solid #00A1E4;
+    padding: 2rem 1.5rem;
+    margin-bottom: 2rem;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+.card:hover {
+    box-shadow: 0 8px 24px rgba(0,161,228,0.15);
+    border-top: 5px solid #0077C0;
+}
+
+.emoji-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.flowchart-step {
+    border: 2px solid #0077C0;
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1.5rem 1rem;
+    font-weight: 700;
+    color: #005082;
+    box-shadow: 0 2px 8px rgba(0,119,192,0.07);
+    margin: 0 0.5rem;
+    min-width: 160px;
+    min-height: 80px;
+    transition: border-color 0.2s;
+}
+.flowchart-step:hover, .flowchart-step:focus {
+    border-color: #00A1E4;
+}
+
+.flowchart-arrow {
+    font-size: 2.5rem;
+    color: #00A1E4;
+    margin: 0 0.5rem;
+}
+
+.chart-container {
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0,161,228,0.08);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.loading-spinner {
+    border: 4px solid #D4E2D4;
+    border-top: 4px solid #7F9F80;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    display: none;
+    margin: 0 auto;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.section-img {
+    width: 100%;
+    max-width: 600px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 16px rgba(0,161,228,0.10);
+    margin: 0 auto 1.5rem auto;
+    display: block;
+}
+
+.section-img-bg {
+    width: 100%;
+    max-width: 600px;
+    height: 220px;
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 16px rgba(0,161,228,0.10);
+    margin: 0 auto 1.5rem auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+.section-img-bg::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 0; bottom: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.25) 100%);
+    pointer-events: none;
+    border-radius: 1.2rem;
+}
+.section-img-bg .section-img-alt {
+    position: absolute;
+    left: 0; top: 0;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
+
+.lang-switcher {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.lang-btn {
+  background: #fff;
+  border: 2px solid #A7C4A8;
+  border-radius: 2em;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #3C3C3C;
+  padding: 0.5em 1.2em;
+  box-shadow: 0 2px 8px rgba(127,159,128,0.08);
+  transition: border 0.2s, background 0.2s, box-shadow 0.2s;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.lang-btn.selected, .lang-btn:focus {
+  border: 2.5px solid #7F9F80;
+  background: #F0F8F0;
+  box-shadow: 0 4px 16px rgba(127,159,128,0.12);
+}
+.header-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.5rem 1rem 0 1rem;
+  background: transparent;
+}
+
+@media (max-width: 600px) {
+    .tab-bar { flex-direction: column; gap: 0.5rem; }
+    .card, .chart-container { padding: 1rem; }
+    .flowchart-step { min-width: 120px; min-height: 60px; font-size: 1rem; }
+    .section-img-bg { height: 140px; }
+    .lang-btn span { display: none; }
+} 

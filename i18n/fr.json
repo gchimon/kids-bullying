@@ -1,0 +1,195 @@
+{
+  "ui": {
+    "title": "Guide interactif pour faire face à l'intimidation",
+    "subtitle": "Outils, identification et action pour les parents et les jeunes enfants",
+    "askerType": "Qui pose la question ?",
+    "askerAge": "Âge/Classe",
+    "parent": "Parent",
+    "child": "Enfant",
+    "teacher": "Enseignant(e)",
+    "counselor": "Conseiller(ère)",
+    "advicePlaceholder": "Par exemple : 'Mon fils de 6 ans est rentré triste et a dit que son ami ne veut plus jouer avec lui et l'appelle par des noms à la récréation. Que faire ?'"
+  },
+  "keywords": [
+    { "fr": ["intimidation", "violence"], "result": "intimidation enfants" },
+    { "fr": ["insulte", "moquerie", "paroles blessantes"], "result": "intimidation verbale enfants" },
+    { "fr": ["isolement", "exclusion", "solitude"], "result": "isolement enfants" },
+    { "fr": ["ami", "amis", "amitié"], "result": "amitié enfants" },
+    { "fr": ["peur", "effrayé"], "result": "peur enfant" },
+    { "fr": ["tristesse", "triste", "pleurer", "déprimé"], "result": "tristesse enfant" },
+    { "fr": ["heureux", "bonheur"], "result": "enfants heureux" },
+    { "fr": ["parent", "parents"], "result": "parent enfant soutien" },
+    { "fr": ["enseignant", "classe"], "result": "enseignant classe enfants" },
+    { "fr": ["aide", "soutien"], "result": "aide enfants" },
+    { "fr": ["communauté", "société", "quartier"], "result": "communauté enfants" },
+    { "fr": ["enfant", "enfants", "garçon", "fille"], "result": "enfants" }
+  ],
+  "advice": {
+    "parent": "Conseil pour parent : Écoutez votre enfant, coopérez avec l'équipe éducative, renforcez la confiance en soi et pratiquez l'empathie.",
+    "child": "Conseil pour enfant : Parlez à un adulte de confiance (parent, enseignant, conseiller), ne restez pas seul, parlez à un ami proche, demandez de l'aide si besoin.",
+    "teacher": "Conseil pour enseignant : Parlez à l'enfant en privé, informez les parents, travaillez à un climat de classe bienveillant.",
+    "counselor": "Conseil pour conseiller : Menez un entretien sensible, élaborez un plan d'intervention, travaillez avec l'équipe pour un climat positif."
+  },
+  "adviceRich": {
+    "verbal": {
+      "parent": {
+        "5-6": "<b>Conseil pour parent d'un enfant de 5-6 ans :</b><br>1. Expliquez simplement ce qu'est l'intimidation et ce qui est permis/interdit.<br>2. Encouragez l'expression des émotions.<br>3. Contactez l'équipe de la maternelle/les autres parents.<br>4. Renforcez la sécurité et l'estime de soi de votre enfant.<br><span style=\"color:#0077C0\">Rappelez-vous : les mots peuvent blesser autant que les actes. Soulignez à votre enfant qu'il n'est pas coupable.</span>",
+        "7-8": "<b>Conseil pour parent d'un enfant de 7-8 ans :</b><br>1. Parlez à hauteur d'enfant, laissez-le s'exprimer.<br>2. Pratiquez ensemble des réponses assertives.<br>3. Encouragez les activités extrascolaires/les amis en dehors de l'école.<br>4. Impliquez l'équipe éducative.<br><span style=\"color:#0077C0\">Rappelez-vous : les mots peuvent blesser autant que les actes. Soulignez à votre enfant qu'il n'est pas coupable.</span>",
+        "9-10": "<b>Conseil pour parent d'un enfant de 9-10 ans :</b><br>1. Parlez à hauteur d'enfant, laissez-le s'exprimer.<br>2. Pratiquez ensemble des réponses assertives.<br>3. Encouragez les activités extrascolaires/les amis en dehors de l'école.<br>4. Impliquez l'équipe éducative.<br><span style=\"color:#0077C0\">Rappelez-vous : les mots peuvent blesser autant que les actes. Soulignez à votre enfant qu'il n'est pas coupable.</span>",
+        "11-13": "<b>Conseil pour parent d'un adolescent :</b><br>1. Gardez une communication ouverte, sans jugement.<br>2. Encouragez le dialogue émotionnel, l'autonomie et la confiance.<br>3. Contactez le conseiller/l'enseignant si besoin.<br>4. Renforcez le sentiment d'appartenance et l'estime de soi.<br><span style=\"color:#0077C0\">Rappelez-vous : les mots peuvent blesser autant que les actes. Soulignez à votre enfant qu'il n'est pas coupable.</span>",
+        "adult": "<b>Conseil pour parent/adulte :</b><br>1. Soyez un modèle – montrez de l'empathie, de l'écoute et des limites.<br>2. Coopérez avec l'équipe éducative.<br>3. Encouragez le dialogue ouvert à la maison.<br>4. Travaillez sur la prévention et la sensibilisation.<br><span style=\"color:#0077C0\">Rappelez-vous : les mots peuvent blesser autant que les actes. Soulignez à votre enfant qu'il n'est pas coupable.</span>",
+        "default": "<b>1. Parlez avec votre enfant :</b> Écoutez, posez des questions ouvertes et montrez votre soutien. Soulignez que vous le croyez.<br><b>2. Contactez l'équipe éducative :</b> Travaillez ensemble pour trouver une solution et demandez un suivi.<br><b>3. Renforcez votre enfant à la maison :</b> Renforcez la confiance en soi, pratiquez des réponses, encouragez l'activité sociale.<br><b>4. Apprenez l'empathie :</b> Parlez des sentiments des autres et pratiquez la résolution pacifique des conflits.<br><span style=\"color:#888\">(Pour une réponse plus personnalisée, précisez l'âge de l'enfant, le type de cas et qui pose la question)</span>"
+      },
+      "child": "<b>Conseil pour l'enfant :</b><br>1. Parle à un adulte de confiance (parent, enseignant, conseiller).<br>2. Ne reste pas seul – il y a toujours quelqu'un à qui parler.<br>3. Essaie de parler à un ami proche.<br>4. Si tu te sens en danger – demande de l'aide immédiatement.<br><span style=\"color:#0077C0\">Rappelle-toi : les mots peuvent blesser autant que les actes. Ce n'est pas ta faute.</span>",
+      "teacher": "<b>Conseil pour l'enseignant :</b><br>1. Parlez à l'enfant en privé, à hauteur d'enfant.<br>2. Informez les parents et le conseiller.<br>3. Travaillez à créer un climat de classe bienveillant.<br>4. Faites la médiation entre les enfants si besoin.<br><span style=\"color:#0077C0\">Rappelez-vous : les mots peuvent blesser autant que les actes. Soulignez à l'enfant qu'il n'est pas coupable.</span>",
+      "counselor": "<b>Conseil pour le conseiller :</b><br>1. Menez un entretien sensible avec l'enfant et les parents.<br>2. Élaborez un plan d'intervention personnalisé.<br>3. Travaillez avec l'équipe éducative sur un climat positif.<br>4. Intégrez des exercices d'empathie et de résolution de conflits.<br><span style=\"color:#0077C0\">Rappelez-vous : les mots peuvent blesser autant que les actes. Soulignez à l'enfant qu'il n'est pas coupable.</span>"
+    },
+    "isolation": {
+      "parent": {
+        "5-6": "<b>Conseil pour parent d'un enfant de 5-6 ans :</b><br>1. Demandez à votre enfant comment il se sent, insistez sur le fait que ce n'est pas de sa faute et montrez votre soutien. Dites : 'Tu n'es pas seul, nous sommes là pour toi.'<br>2. Demandez à l'équipe d'aider à intégrer votre enfant, proposez des activités de groupe et parlez de l'acceptation.<br>3. Encouragez les rencontres en dehors de l'école et pratiquez les compétences sociales par le jeu.<br>4. Apprenez l'empathie : Parlez de l'importance d'accepter chacun et pratiquez des phrases de soutien.<br><span style=\"color:#0077C0\">La solitude est très difficile pour les enfants. Montrez de l'empathie et aidez à créer des liens sociaux.</span>",
+        "7-8": "<b>Conseil pour parent d'un enfant de 7-8 ans :</b><br>1. Posez des questions ouvertes, laissez votre enfant s'exprimer sans pression et montrez de l'empathie. Soulignez : 'Ce n'est pas de ta faute, cela arrive à beaucoup d'enfants.'<br>2. Demandez une intervention proactive, une discussion en classe ou une médiation.<br>3. Encouragez les clubs, l'activité sociale en dehors de l'école et renforcez les centres d'intérêt.<br>4. Apprenez l'empathie : Parlez de l'acceptation des autres et pratiquez des réponses non agressives.<br><span style=\"color:#0077C0\">La solitude est très difficile pour les enfants. Montrez de l'empathie et aidez à créer des liens sociaux.</span>",
+        "9-10": "<b>Conseil pour parent d'un enfant de 9-10 ans :</b><br>1. Posez des questions ouvertes, laissez votre enfant s'exprimer sans pression et montrez de l'empathie. Soulignez : 'Ce n'est pas de ta faute, cela arrive à beaucoup d'enfants.'<br>2. Demandez une intervention proactive, une discussion en classe ou une médiation.<br>3. Encouragez les clubs, l'activité sociale en dehors de l'école et renforcez les centres d'intérêt.<br>4. Apprenez l'empathie : Parlez de l'acceptation des autres et pratiquez des réponses non agressives.<br><span style=\"color:#0077C0\">La solitude est très difficile pour les enfants. Montrez de l'empathie et aidez à créer des liens sociaux.</span>",
+        "11-13": "<b>Conseil pour parent d'un adolescent :</b><br>1. Gardez une communication ouverte, sans jugement.<br>2. Encouragez le dialogue émotionnel, l'autonomie et la confiance.<br>3. Contactez le conseiller/l'enseignant si besoin.<br>4. Renforcez le sentiment d'appartenance et l'estime de soi.<br><span style=\"color:#0077C0\">La solitude est très difficile pour les enfants. Montrez de l'empathie et aidez à créer des liens sociaux.</span>",
+        "adult": "<b>Conseil pour parent/adulte :</b><br>1. Soyez un modèle – montrez de l'empathie, de l'écoute et des limites.<br>2. Coopérez avec l'équipe éducative.<br>3. Encouragez le dialogue ouvert à la maison.<br>4. Travaillez sur la prévention et la sensibilisation.<br><span style=\"color:#0077C0\">La solitude est très difficile pour les enfants. Montrez de l'empathie et aidez à créer des liens sociaux.</span>",
+        "default": "<b>1. Parlez avec votre enfant :</b> Posez des questions ouvertes, laissez-le s'exprimer sans pression et montrez de l'empathie. Soulignez : 'Ce n'est pas de ta faute, cela arrive à beaucoup d'enfants.'<br><b>2. Contactez l'équipe éducative :</b> Demandez une intervention proactive, une discussion en classe ou une médiation.<br><b>3. Renforcez votre enfant à la maison :</b> Encouragez les clubs, l'activité sociale en dehors de l'école et renforcez les centres d'intérêt.<br><b>4. Apprenez l'empathie :</b> Parlez de l'acceptation des autres et pratiquez des réponses non agressives.<br><span style=\"color:#888\">(Pour une réponse plus personnalisée, précisez l'âge de l'enfant, le type de cas et qui pose la question)</span>"
+      },
+      "child": "<b>Conseil pour l'enfant :</b><br>1. Parle à un adulte de confiance (parent, enseignant, conseiller).<br>2. Ne reste pas seul – il y a toujours quelqu'un à qui parler.<br>3. Essaie de parler à un ami proche.<br>4. Si tu te sens seul – demande de l'aide immédiatement.<br><span style=\"color:#0077C0\">La solitude est très difficile pour les enfants. Montrez de l'empathie et aidez à créer des liens sociaux.</span>",
+      "teacher": "<b>Conseil pour l'enseignant :</b><br>1. Parlez à l'enfant en privé, à hauteur d'enfant.<br>2. Informez les parents et le conseiller.<br>3. Travaillez à créer un climat de classe bienveillant.<br>4. Faites la médiation entre les enfants si besoin.<br><span style=\"color:#0077C0\">La solitude est très difficile pour les enfants. Montrez de l'empathie et aidez à créer des liens sociaux.</span>",
+      "counselor": "<b>Conseil pour le conseiller :</b><br>1. Menez un entretien sensible avec l'enfant et les parents.<br>2. Élaborez un plan d'intervention personnalisé.<br>3. Travaillez avec l'équipe éducative sur un climat positif.<br>4. Intégrez des exercices d'empathie et de résolution de conflits.<br><span style=\"color:#0077C0\">La solitude est très difficile pour les enfants. Montrez de l'empathie et aidez à créer des liens sociaux.</span>"
+    },
+    "physical": {
+      "parent": {
+        "5-6": "<b>Conseil pour parent d'un enfant de 5-6 ans :</b><br>1. Calmez votre enfant, demandez-lui ce qui s'est passé et expliquez l'importance d'en parler à un adulte.<br>2. Exigez une action immédiate de l'équipe, une documentation et une discussion avec toutes les parties concernées.<br>3. Pratiquez des stratégies d'adaptation non violentes à la maison et renforcez la confiance en soi.<br>4. Apprenez l'empathie : Expliquez qu'un enfant qui blesse physiquement a besoin d'aide et pratiquez la résolution pacifique des conflits.<br><span style=\"color:#0077C0\">La violence physique nécessite une attention immédiate. Assurez la sécurité physique et émotionnelle.</span>",
+        "7-8": "<b>Conseil pour parent d'un enfant de 7-8 ans :</b><br>1. Laissez votre enfant s'exprimer, insistez sur le fait que ce n'est pas de sa faute et qu'il y a quelqu'un à qui parler.<br>2. Exigez une action immédiate de l'équipe, une documentation et une discussion avec les parents des deux parties.<br>3. Encouragez le sport, pratiquez des réponses assertives et renforcez l'estime de soi.<br>4. Apprenez l'empathie : Parlez des sentiments des autres et pratiquez la résolution de conflits.<br><span style=\"color:#0077C0\">La violence physique nécessite une attention immédiate. Assurez la sécurité physique et émotionnelle.</span>",
+        "9-10": "<b>Conseil pour parent d'un enfant de 9-10 ans :</b><br>1. Laissez votre enfant s'exprimer, insistez sur le fait que ce n'est pas de sa faute et qu'il y a quelqu'un à qui parler.<br>2. Exigez une action immédiate de l'équipe, une documentation et une discussion avec les parents des deux parties.<br>3. Encouragez le sport, pratiquez des réponses assertives et renforcez l'estime de soi.<br>4. Apprenez l'empathie : Parlez des sentiments des autres et pratiquez la résolution de conflits.<br><span style=\"color:#0077C0\">La violence physique nécessite une attention immédiate. Assurez la sécurité physique et émotionnelle.</span>",
+        "11-13": "<b>Conseil pour parent d'un adolescent :</b><br>1. Gardez une communication ouverte, sans jugement.<br>2. Encouragez le dialogue émotionnel, l'autonomie et la confiance.<br>3. Contactez le conseiller/l'enseignant si besoin.<br>4. Renforcez le sentiment d'appartenance et l'estime de soi.<br><span style=\"color:#0077C0\">La violence physique nécessite une attention immédiate. Assurez la sécurité physique et émotionnelle.</span>",
+        "adult": "<b>Conseil pour parent/adulte :</b><br>1. Soyez un modèle – montrez de l'empathie, de l'écoute et des limites.<br>2. Coopérez avec l'équipe éducative.<br>3. Encouragez le dialogue ouvert à la maison.<br>4. Travaillez sur la prévention et la sensibilisation.<br><span style=\"color:#0077C0\">La violence physique nécessite une attention immédiate. Assurez la sécurité physique et émotionnelle.</span>",
+        "default": "<b>1. Parlez avec votre enfant :</b> Laissez-le s'exprimer, insistez sur le fait que ce n'est pas de sa faute et qu'il y a quelqu'un à qui parler.<br><b>2. Contactez l'équipe éducative :</b> Exigez une action immédiate, une documentation et une discussion avec les parents des deux parties.<br><b>3. Renforcez votre enfant à la maison :</b> Encouragez le sport, pratiquez des réponses assertives et renforcez l'estime de soi.<br><b>4. Apprenez l'empathie :</b> Parlez des sentiments des autres et pratiquez la résolution de conflits.<br><span style=\"color:#888\">(Pour une réponse plus personnalisée, précisez l'âge de l'enfant, le type de cas et qui pose la question)</span>"
+      },
+      "child": "<b>Conseil pour l'enfant :</b><br>1. Parle à un adulte de confiance (parent, enseignant, conseiller).<br>2. Ne reste pas seul – il y a toujours quelqu'un à qui parler.<br>3. Essaie de parler à un ami proche.<br>4. Si tu te sens en danger – demande de l'aide immédiatement.<br><span style=\"color:#0077C0\">La violence physique nécessite une attention immédiate. Assurez la sécurité physique et émotionnelle.</span>",
+      "teacher": "<b>Conseil pour l'enseignant :</b><br>1. Parlez à l'enfant en privé, à hauteur d'enfant.<br>2. Informez les parents et le conseiller.<br>3. Travaillez à créer un climat de classe bienveillant.<br>4. Faites la médiation entre les enfants si besoin.<br><span style=\"color:#0077C0\">La violence physique nécessite une attention immédiate. Assurez la sécurité physique et émotionnelle.</span>",
+      "counselor": "<b>Conseil pour le conseiller :</b><br>1. Menez un entretien sensible avec l'enfant et les parents.<br>2. Élaborez un plan d'intervention personnalisé.<br>3. Travaillez avec l'équipe éducative sur un climat positif.<br>4. Intégrez des exercices d'empathie et de résolution de conflits.<br><span style=\"color:#0077C0\">La violence physique nécessite une attention immédiate. Assurez la sécurité physique et émotionnelle.</span>"
+    },
+    "bully": {
+      "parent": {
+        "default": "<b>1. Parlez avec votre enfant :</b> Parlez à hauteur d'enfant, essayez de comprendre les raisons du comportement et expliquez que les mots/actes peuvent blesser.<br><b>2. Impliquez l'équipe éducative :</b> Contactez l'enseignant/le conseiller, demandez un suivi et un soutien.<br><b>3. Renforcez l'empathie :</b> Pratiquez l'empathie avec votre enfant, faites des jeux de rôle et expliquez l'importance de l'amitié.<br><b>4. Fixez des limites :</b> Expliquez que certains comportements sont inacceptables et fixez des limites claires à la maison.<br><span style=\"color:#0077C0\">Un enfant qui blesse les autres a besoin de repères, de limites et d'empathie.</span>"
+      },
+      "child": "<b>Conseil pour l'enfant :</b><br>1. Comprends que les mots et les actes peuvent blesser. Essaie d'imaginer ce que ressent l'autre enfant.<br>2. Parle à un adulte pour obtenir de l'aide.<br>3. Essaie de t'excuser et d'améliorer ton comportement.<br><span style=\"color:#0077C0\">Un enfant qui blesse les autres a besoin de repères, de limites et d'empathie.</span>",
+      "teacher": "<b>Conseil pour l'enseignant :</b><br>1. Parlez à l'enfant des sentiments, des raisons du comportement et des conséquences.<br>2. Impliquez les parents.<br>3. Travaillez sur le renforcement de l'empathie en classe.<br>4. Fixez des limites claires.<br><span style=\"color:#0077C0\">Un enfant qui blesse les autres a besoin de repères, de limites et d'empathie.</span>",
+      "counselor": "<b>Conseil pour le conseiller :</b><br>1. Menez un entretien sensible avec l'enfant et les parents.<br>2. Élaborez un plan d'intervention personnalisé.<br>3. Travaillez avec l'équipe éducative sur un climat positif.<br>4. Intégrez des exercices d'empathie et de résolution de conflits.<br><span style=\"color:#0077C0\">Un enfant qui blesse les autres a besoin de repères, de limites et d'empathie.</span>"
+    },
+    "general": {
+      "parent": {
+        "default": "<b>1. Parlez avec votre enfant :</b> Écoutez, posez des questions ouvertes et montrez votre soutien. Soulignez que vous le croyez.<br><b>2. Contactez l'équipe éducative :</b> Travaillez ensemble pour trouver une solution et demandez un suivi.<br><b>3. Renforcez votre enfant à la maison :</b> Renforcez la confiance en soi, pratiquez des réponses, encouragez l'activité sociale.<br><b>4. Apprenez l'empathie :</b> Parlez des sentiments des autres et pratiquez la résolution pacifique des conflits.<br><span style=\"color:#888\">(Pour une réponse plus personnalisée, précisez l'âge de l'enfant, le type de cas et qui pose la question)</span>"
+      },
+      "child": "<b>Conseil pour l'enfant :</b><br>1. Parle à un adulte de confiance (parent, enseignant, conseiller).<br>2. Ne reste pas seul – il y a toujours quelqu'un à qui parler.<br>3. Essaie de parler à un ami proche.<br>4. Si tu te sens en danger – demande de l'aide immédiatement.<br>",
+      "teacher": "<b>Conseil pour l'enseignant :</b><br>1. Parlez à l'enfant en privé, à hauteur d'enfant.<br>2. Informez les parents et le conseiller.<br>3. Travaillez à créer un climat de classe bienveillant.<br>4. Faites la médiation entre les enfants si besoin.<br>",
+      "counselor": "<b>Conseil pour le conseiller :</b><br>1. Menez un entretien sensible avec l'enfant et les parents.<br>2. Élaborez un plan d'intervention personnalisé.<br>3. Travaillez avec l'équipe éducative sur un climat positif.<br>4. Intégrez des exercices d'empathie et de résolution de conflits.<br>"
+    }
+  },
+  "define": {
+    "title": "Étape 1 : Identifier le problème",
+    "desc": "L'intimidation n'est pas un jeu d'enfant. Il s'agit d'un préjudice intentionnel et répété. Cette section vous aide à comprendre ses différentes formes.",
+    "card1Title": "Intimidation verbale",
+    "card1Desc": "Moqueries, insultes, menaces ou propagation de rumeurs nuisibles.",
+    "card2Title": "Intimidation physique",
+    "card2Desc": "Pousser, frapper, tirer ou tout contact physique destiné à blesser ou humilier.",
+    "card3Title": "Exclusion sociale",
+    "card3Desc": "Exclusion délibérée, ignorance ou empêchement d'un enfant de participer à des jeux ou activités."
+  },
+  "identify": {
+    "title": "Étape 2 : Repérer les signes",
+    "desc": "Les enfants ne partagent pas toujours. Soyez attentif aux changements de comportement. Utilisez les onglets pour vérifier les signes d'alerte.",
+    "tabVictim": "Signes que l'enfant est victime",
+    "tabBully": "Signes que l'enfant est harceleur",
+    "victimSigns": [
+      "Baisse soudaine de la confiance en soi et repli sur soi.",
+      "Réticence à aller à l'école et plaintes de douleurs.",
+      "Problèmes de sommeil, cauchemars ou changements d'appétit.",
+      "Objets perdus, vêtements déchirés ou marques physiques inexpliquées."
+    ],
+    "bullySigns": [
+      "Forte envie de contrôle et d'attention.",
+      "Difficulté à montrer de l'empathie et tendance à rabaisser les autres.",
+      "Utilisation de l'agression (verbale ou physique) pour résoudre les conflits.",
+      "Comportement agressif envers les frères et sœurs, les animaux ou les amis."
+    ]
+  },
+  "understand": {
+    "title": "Étape 3 : Comprendre l'impact",
+    "desc": "Les cicatrices ne sont pas toujours visibles. Le graphique illustre les effets émotionnels courants que les enfants subissent à cause de l'intimidation."
+  },
+  "act": {
+    "title": "Étape 4 : Plan d'action pour les parents",
+    "desc": "Si vous avez identifié un problème, agissez avec détermination et sensibilité. Suivez ces étapes pour une gestion efficace.",
+    "step1": "<strong>1. Écoutez et croyez :</strong><br/>Créez un espace sûr pour la discussion, laissez l'enfant parler et croyez-le sans jugement.",
+    "step2": "<strong>2. Validez les sentiments et soutenez :</strong><br/>Dites 'Je comprends que tu as été blessé/en colère' et assurez-lui que vous êtes là pour aider.",
+    "step3": "<strong>3. Collaborez avec l'école :</strong><br/>Contactez l'enseignant, décrivez la situation et travaillez ensemble pour trouver une solution.",
+    "step4": "<strong>4. Renforcez et enseignez des stratégies :</strong><br/>Encouragez des activités qui renforcent la confiance et pratiquez des réponses non violentes."
+  },
+  "prevent": {
+    "title": "Étape 5 : La prévention est la clé",
+    "desc": "La meilleure façon de lutter contre l'intimidation est de construire un environnement de soutien basé sur le respect. Le graphique compare l'efficacité de différentes stratégies de prévention."
+  },
+  "personalize": {
+    "title": "Étape 6 : Obtenez un conseil personnalisé ✨",
+    "desc": "Chaque cas est différent. Décrivez un scénario spécifique auquel vous êtes confronté, et sélectionnez qui vous êtes et l'âge de l'enfant pour obtenir un conseil pratique et adapté."
+  },
+  "footer": {
+    "title": "Un front uni contre l'intimidation",
+    "desc": "Une gestion efficace nécessite la coopération. Chacun de nous – parents, éducateurs et membres de la communauté – a un rôle important à jouer pour créer un environnement sûr.",
+    "card1Title": "Parents",
+    "card1Desc": "Soyez un modèle, maintenez un dialogue ouvert et fixez des limites claires.",
+    "card2Title": "Cadre éducatif",
+    "card2Desc": "Établissez des politiques claires, formez le personnel et fournissez des outils d'adaptation.",
+    "card3Title": "Communauté",
+    "card3Desc": "Créez un environnement de soutien, sensibilisez et favorisez les activités communes.",
+    "credits": "Cette application est basée sur un article complet sur la gestion de l'intimidation et de la violence verbale."
+  },
+  "creditsBar": "Images de <a href=\"https://pixabay.com/\" target=\"_blank\" rel=\"noopener\" style=\"color:#0077C0;\">Pixabay</a> | Développement : chimon | Cartographie, dynamique & aide : OpenAI ChatGPT",
+  "charts": {
+    "impactLabels": [
+      "Peur et anxiété",
+      "Baisse de la confiance en soi",
+      "Solitude et tristesse",
+      "Colère et frustration"
+    ],
+    "impactData": [40, 30, 20, 10],
+    "impactAriaLabel": "Graphique de l'impact émotionnel",
+    "preventionLabels": [
+      "Éducation à l'empathie",
+      "Dialogue ouvert à la maison",
+      "Apprentissage des compétences sociales",
+      "Limites claires"
+    ],
+    "preventionData": [90, 85, 75, 80],
+    "preventionAriaLabel": "Graphique des stratégies de prévention"
+  },
+  "sectionImages": {
+    "section-img-define": "Illustration : Types d'intimidation",
+    "section-img-identify": "Illustration : Signes d'alerte",
+    "section-img-understand": "Illustration : Impact émotionnel",
+    "section-img-act": "Illustration : Plan d'action parental",
+    "section-img-prevent": "Illustration : Prévention de l'intimidation",
+    "section-img-personalize": "Illustration : Conseil personnalisé",
+    "section-img-footer": "Illustration : Front uni contre l'intimidation"
+  },
+  "aria": {
+    "tabVictim": "Onglet : Signes que l'enfant est victime",
+    "tabBully": "Onglet : Signes que l'enfant est harceleur",
+    "adviceOutput": "Zone d'affichage du conseil personnalisé",
+    "getAdviceBtn": "Obtenir un conseil personnalisé",
+    "loadingSpinner": "Chargement de la réponse...",
+    "footer": "Zone de résumé et de crédits",
+    "cards": "Carte d'information",
+    "mainNav": "Navigation principale",
+    "personalizeForm": "Formulaire de conseil personnalisé",
+    "sectionDefine": "Types d'intimidation",
+    "sectionIdentify": "Signes d'alerte",
+    "sectionUnderstand": "Impact émotionnel",
+    "sectionAct": "Plan d'action parental",
+    "sectionPrevent": "Prévention de l'intimidation",
+    "sectionPersonalize": "Conseil personnalisé",
+    "sectionFooter": "Front uni contre l'intimidation"
+  }
+} 
