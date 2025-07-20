@@ -480,8 +480,6 @@ function getTTSLang() {
 // =====================
 // TTS Controls (rate & pitch)
 // =====================
-let ttsRate = parseFloat(localStorage.getItem('ttsRate')) || 1.0;
-let ttsPitch = parseFloat(localStorage.getItem('ttsPitch')) || 1.0;
 const ttsRateInput = document.getElementById('tts-rate');
 const ttsPitchInput = document.getElementById('tts-pitch');
 const ttsRateValue = document.getElementById('tts-rate-value');
@@ -596,10 +594,10 @@ function getSectionI18nText(sectionId) {
 function showHebrewTTSWarningBubble(btn) {
   // הסר בועית קיימת
   document.querySelectorAll('.tts-warning-bubble').forEach(b => b.remove());
+  if (!btn || !btn.classList.contains('tts-btn')) return;
   if (window.currentLang !== 'he') return;
   const hasVoice = window.speechSynthesis.getVoices().some(v => v.lang === 'he-IL');
   if (hasVoice) return;
-  if (!btn) return;
   // צור בועית חדשה
   const bubble = document.createElement('div');
   bubble.className = 'tts-warning-bubble';
@@ -657,6 +655,93 @@ setLanguage = async function(lang) {
   await origSetLanguage(lang);
   // showHebrewTTSWarningIfNeeded(); // This function is no longer needed
 };
+
+// ===============
+// TTS Settings Popup
+// ===============
+let ttsRate = parseFloat(localStorage.getItem('ttsRate')) || 1.0;
+let ttsPitch = parseFloat(localStorage.getItem('ttsPitch')) || 1.0;
+let ttsPopup = null;
+let ttsPopupBtn = null;
+
+function showTTSSettingsPopup(btn) {
+  // הסר בועית קודמת
+  if (ttsPopup) ttsPopup.remove();
+  document.querySelectorAll('.tts-settings-popup').forEach(p => p.remove());
+  ttsPopupBtn = btn;
+  // צור בועית
+  ttsPopup = document.createElement('div');
+  ttsPopup.className = 'tts-settings-popup';
+  ttsPopup.setAttribute('role', 'dialog');
+  ttsPopup.setAttribute('aria-modal', 'true');
+  ttsPopup.setAttribute('tabindex', '0');
+  ttsPopup.innerHTML = `
+    <button class="tts-popup-close" aria-label="סגור הגדרות" title="סגור">✖️</button>
+    <label for="tts-popup-rate">מהירות דיבור: <span id="tts-popup-rate-value">${ttsRate.toFixed(2)}</span></label><br>
+    <input type="range" min="0.5" max="2" step="0.05" value="${ttsRate}" id="tts-popup-rate" aria-labelledby="tts-popup-rate-label"><br>
+    <label for="tts-popup-pitch">טון דיבור: <span id="tts-popup-pitch-value">${ttsPitch.toFixed(2)}</span></label><br>
+    <input type="range" min="0.5" max="2" step="0.05" value="${ttsPitch}" id="tts-popup-pitch" aria-labelledby="tts-popup-pitch-label">
+  `;
+  btn.style.position = 'relative';
+  btn.parentNode.insertBefore(ttsPopup, btn.nextSibling);
+  // פוקוס
+  setTimeout(() => ttsPopup.focus(), 50);
+  // אירועים
+  ttsPopup.querySelector('.tts-popup-close').onclick = closeTTSSettingsPopup;
+  ttsPopup.addEventListener('keydown', e => { if (e.key === 'Escape') closeTTSSettingsPopup(); });
+  // סליידרים
+  const rateInput = ttsPopup.querySelector('#tts-popup-rate');
+  const pitchInput = ttsPopup.querySelector('#tts-popup-pitch');
+  const rateVal = ttsPopup.querySelector('#tts-popup-rate-value');
+  const pitchVal = ttsPopup.querySelector('#tts-popup-pitch-value');
+  rateInput.addEventListener('input', () => {
+    ttsRate = parseFloat(rateInput.value);
+    rateVal.textContent = ttsRate.toFixed(2);
+    localStorage.setItem('ttsRate', ttsRate);
+    restartSpeakingIfNeeded();
+  });
+  pitchInput.addEventListener('input', () => {
+    ttsPitch = parseFloat(pitchInput.value);
+    pitchVal.textContent = ttsPitch.toFixed(2);
+    localStorage.setItem('ttsPitch', ttsPitch);
+    restartSpeakingIfNeeded();
+  });
+  // סגירה בלחיצה מחוץ לבועית
+  setTimeout(() => {
+    document.addEventListener('mousedown', outsideTTSClick, { once: true });
+  }, 0);
+}
+function closeTTSSettingsPopup() {
+  if (ttsPopup) ttsPopup.remove();
+  ttsPopup = null;
+  ttsPopupBtn = null;
+}
+function outsideTTSClick(e) {
+  if (ttsPopup && !ttsPopup.contains(e.target) && !e.target.classList.contains('tts-settings-btn')) {
+    closeTTSSettingsPopup();
+  }
+}
+function restartSpeakingIfNeeded() {
+  if (currentTTSBtn && currentTTSBtn.classList.contains('speaking')) {
+    currentTTSBtn.click(); // stop
+    setTimeout(() => currentTTSBtn.click(), 100); // restart
+  }
+}
+// הפעל popup בלחיצה על כפתור הגדרות
+function setupTTSSettingsButtons() {
+  document.querySelectorAll('.tts-settings-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      if (ttsPopup && ttsPopupBtn === btn) {
+        closeTTSSettingsPopup();
+      } else {
+        showTTSSettingsPopup(btn);
+      }
+    });
+  });
+}
+// הפעל את הפונקציה הזו ב-load
+window.addEventListener('DOMContentLoaded', setupTTSSettingsButtons);
 
 // =====================
 // On Page Load
@@ -725,4 +810,14 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   setupTTSButtons();
   setupAdviceTTSButton();
+  // ודא הצגת בועית 'אין קול עברי' גם בטעינה ראשונה
+  setTimeout(() => {
+    if (window.currentLang === 'he') {
+      const hasVoice = window.speechSynthesis.getVoices().some(v => v.lang === 'he-IL');
+      if (!hasVoice) {
+        const firstBtn = document.querySelector('.tts-btn');
+        if (firstBtn) showHebrewTTSWarningBubble(firstBtn);
+      }
+    }
+  }, 800); // זמן קצר לטעינת קולות
 }); 
