@@ -593,6 +593,29 @@ function getSectionI18nText(sectionId) {
   }
 }
 
+function showHebrewTTSWarningBubble(btn) {
+  // הסר בועית קיימת
+  document.querySelectorAll('.tts-warning-bubble').forEach(b => b.remove());
+  if (window.currentLang !== 'he') return;
+  const hasVoice = window.speechSynthesis.getVoices().some(v => v.lang === 'he-IL');
+  if (hasVoice) return;
+  if (!btn) return;
+  // צור בועית חדשה
+  const bubble = document.createElement('div');
+  bubble.className = 'tts-warning-bubble';
+  bubble.setAttribute('role', 'status');
+  bubble.setAttribute('aria-live', 'polite');
+  bubble.setAttribute('tabindex', '0');
+  bubble.innerHTML = `
+    לא נמצא קול עברי במערכת.<br>
+    <a href="https://support.microsoft.com/he-il/windows/%D7%94%D7%95%D7%A1%D7%A4%D7%AA-%D7%A7%D7%95%D7%9C%D7%95%D7%AA-%D7%93%D7%99%D7%91%D7%95%D7%A8-%D7%91-windows-10-71c64e37-28fa-4652-b05a-2b1b1e0127a0" target="_blank" rel="noopener" tabindex="0">להתקנת קול עברי ב-Windows לחצו כאן</a>
+  `;
+  // מיקום יחסי לכפתור
+  btn.style.position = 'relative';
+  btn.parentNode.insertBefore(bubble, btn.nextSibling);
+}
+
+// עדכן את setupTTSButtons ו-setupAdviceTTSButton להפעיל את הבועית במידת הצורך
 function setupTTSButtons() {
   document.querySelectorAll('.tts-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -601,17 +624,19 @@ function setupTTSButtons() {
       const sectionId = section.id || (section.tagName === 'FOOTER' ? 'footer' : '');
       const text = getSectionI18nText(sectionId);
       if (!text) return;
+      // הצג בועית אם צריך
+      showHebrewTTSWarningBubble(btn);
       speakText(text, getTTSLang(), btn);
     });
   });
 }
-
 function setupAdviceTTSButton() {
   const btn = document.querySelector('.tts-advice-btn');
   if (!btn) return;
   btn.addEventListener('click', () => {
     const text = getAdviceText();
     if (!text) return;
+    showHebrewTTSWarningBubble(btn);
     speakText(text, getTTSLang(), btn);
   });
 }
@@ -626,33 +651,11 @@ function getAdviceText() {
   return clone.textContent.trim();
 }
 
-function showHebrewTTSWarningIfNeeded() {
-  if (window.currentLang === 'he') {
-    setTimeout(() => {
-      const hasVoice = window.speechSynthesis.getVoices().some(v => v.lang === 'he-IL');
-      const warningDiv = document.getElementById('tts-warning');
-      if (!hasVoice && warningDiv) {
-        warningDiv.innerHTML = `
-          <span>לא נמצא קול עברי במערכת. <br>
-          <a href="https://support.microsoft.com/he-il/windows/%D7%94%D7%95%D7%A1%D7%A4%D7%AA-%D7%A7%D7%95%D7%9C%D7%95%D7%AA-%D7%93%D7%99%D7%91%D7%95%D7%A8-%D7%91-windows-10-71c64e37-28fa-4652-b05a-2b1b1e0127a0" target="_blank" rel="noopener" tabindex="0">להתקנת קול עברי ב-Windows לחצו כאן</a>
-          </span>
-        `;
-        warningDiv.style.display = '';
-      } else if (warningDiv) {
-        warningDiv.style.display = 'none';
-      }
-    }, 800);
-  } else {
-    const warningDiv = document.getElementById('tts-warning');
-    if (warningDiv) warningDiv.style.display = 'none';
-  }
-}
-window.speechSynthesis.onvoiceschanged = showHebrewTTSWarningIfNeeded;
 // הפעל גם אחרי טעינת שפה
 const origSetLanguage = setLanguage;
 setLanguage = async function(lang) {
   await origSetLanguage(lang);
-  showHebrewTTSWarningIfNeeded();
+  // showHebrewTTSWarningIfNeeded(); // This function is no longer needed
 };
 
 // =====================
