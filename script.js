@@ -1004,14 +1004,14 @@ window.addEventListener('DOMContentLoaded', () => {
   setupTTSButtons();
   setupAdviceTTSButton();
   setupRefreshImageButtons(); // Call setupRefreshImageButtons here
-  // ודא הצגת בועית 'אין קול עברי' גם בטעינה ראשונה
-  setTimeout(() => {
-    if (window.currentLang === 'he') {
-      const hasVoice = window.speechSynthesis.getVoices().some(v => v.lang === 'he-IL');
-      if (!hasVoice) {
-        const firstBtn = document.querySelector('.tts-btn');
-        if (firstBtn) TTSPlayer.open({ text: 'לא נמצא קול עברי במערכת.', lang: 'he-IL', sectionTitle: 'הגדרות' });
-      }
-    }
-  }, 800); // זמן קצר לטעינת קולות
+  // // ודא הצגת בועית 'אין קול עברי' גם בטעינה ראשונה
+  // setTimeout(() => {
+  //   if (window.currentLang === 'he') {
+  //     const hasVoice = window.speechSynthesis.getVoices().some(v => v.lang === 'he-IL');
+  //     if (!hasVoice) {
+  //       const firstBtn = document.querySelector('.tts-btn');
+  //       if (firstBtn) TTSPlayer.open({ text: 'לא נמצא קול עברי במערכת.', lang: 'he-IL', sectionTitle: 'הגדרות' });
+  //     }
+  //   }
+  // }, 800); // זמן קצר לטעינת קולות
 }); 
