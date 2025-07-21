@@ -8,7 +8,9 @@
     "child": "Enfant",
     "teacher": "Enseignant(e)",
     "counselor": "Conseiller(ère)",
-    "advicePlaceholder": "Par exemple : 'Mon fils de 6 ans est rentré triste et a dit que son ami ne veut plus jouer avec lui et l'appelle par des noms à la récréation. Que faire ?'"
+    "advicePlaceholder": "Par exemple : 'Mon fils de 6 ans est rentré triste et a dit que son ami ne veut plus jouer avec lui et l'appelle par des noms à la récréation. Que faire ?'",
+    "linkGov": "Infos gouvernementales",
+    "linkInfo": "Infographies"
   },
   "keywords": [
     { "fr": ["intimidation", "violence"], "result": "intimidation enfants" },

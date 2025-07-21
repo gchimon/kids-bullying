@@ -517,100 +517,133 @@ function updateAdviceOutput(dict, askerType) {
 // =====================
 // Language Switcher
 // =====================
-async function loadLangFile(lang) {
-  const res = await fetch(`i18n/${lang}.json`);
-  return await res.json();
-}
-
-async function setLanguage(lang) {
-  localStorage.setItem('lang', lang);
-  try {
-    const dict = await loadLangFile(lang);
-    window.currentLang = lang;
-    window.currentDict = dict;
-    // Update page direction and language
-    const html = document.getElementById('html-root');
-    if (lang === 'he') {
-      html.setAttribute('dir', 'rtl');
-      html.setAttribute('lang', 'he');
-    } else if (lang === 'fr') {
-      html.setAttribute('dir', 'ltr');
-      html.setAttribute('lang', 'fr');
-    } else {
-      html.setAttribute('dir', 'ltr');
-      html.setAttribute('lang', 'en');
+async function setLanguage(lang, fromUser = false) {
+  // טען תרגום אם צריך
+  if (!window.translations) window.translations = {};
+  if (!window.translations[lang] || !window.translations[lang].loaded) {
+    try {
+      const response = await fetch(`i18n/${lang}.json`);
+      const data = await response.json();
+      window.translations[lang] = { data, loaded: true };
+    } catch (error) {
+      alert('שגיאה בטעינת קובץ שפה');
+      return;
     }
-    // Main UI
-    document.querySelector('.header-title').textContent = dict.ui.title;
-    document.querySelector('.subtitle').textContent = dict.ui.subtitle;
-    // Update asker type and age selectors
-    document.getElementById('askerType').options[0].text = dict.ui.parent;
-    document.getElementById('askerType').options[1].text = dict.ui.child;
-    document.getElementById('askerType').options[2].text = dict.ui.teacher;
-    document.getElementById('askerType').options[3].text = dict.ui.counselor;
-    document.getElementById('askerAge').previousElementSibling.textContent = dict.ui.askerAge;
-    document.getElementById('scenarioInput').placeholder = dict.ui.advicePlaceholder;
-    // Update all sections
-    updateDefineSection(dict);
-    updateIdentifySection(dict);
-    updateUnderstandSection(dict);
-    updateActSection(dict);
-    updatePreventSection(dict);
-    updatePersonalizeSection(dict);
-    updateFooterSection(dict);
-    updateCreditsBar(dict);
-    // Update section images
-    const sectionImageDefs = [
-      { id: 'section-img-define', text: dict.sectionImageQueries?.['section-img-define'] || (lang === 'he' ? 'בריונות ילדים' : lang === 'fr' ? 'intimidation enfants' : 'bullying children'), alt: dict.sectionImages?.['section-img-define'] || 'Section illustration' },
-      { id: 'section-img-identify', text: dict.sectionImageQueries?.['section-img-identify'] || (lang === 'he' ? 'סימני אזהרה ילדים' : lang === 'fr' ? 'signes harcèlement enfants' : 'bullying warning signs children'), alt: dict.sectionImages?.['section-img-identify'] || 'Section illustration' },
-      { id: 'section-img-understand', text: dict.sectionImageQueries?.['section-img-understand'] || (lang === 'he' ? 'רגשות ילדים' : lang === 'fr' ? 'émotions enfants' : 'emotions children'), alt: dict.sectionImages?.['section-img-understand'] || 'Section illustration' },
-      { id: 'section-img-act', text: dict.sectionImageQueries?.['section-img-act'] || (lang === 'he' ? 'הורה עוזר' : lang === 'fr' ? 'parent aide enfant' : 'parent helps child'), alt: dict.sectionImages?.['section-img-act'] || 'Section illustration' },
-      { id: 'section-img-prevent', text: dict.sectionImageQueries?.['section-img-prevent'] || (lang === 'he' ? 'מניעת בריונות' : lang === 'fr' ? 'prévention intimidation' : 'bullying prevention'), alt: dict.sectionImages?.['section-img-prevent'] || 'Section illustration' },
-      { id: 'section-img-personalize', text: dict.sectionImageQueries?.['section-img-personalize'] || (lang === 'he' ? 'שאלה ילדים' : lang === 'fr' ? 'question enfants' : 'question children'), alt: dict.sectionImages?.['section-img-personalize'] || 'Section illustration' },
-      { id: 'section-img-footer', text: dict.sectionImageQueries?.['section-img-footer'] || (lang === 'he' ? 'קהילה ילדים' : lang === 'fr' ? 'communauté enfants' : 'community children'), alt: dict.sectionImages?.['section-img-footer'] || 'Section illustration' }
-    ];
-    for (const section of sectionImageDefs) {
-      await updateSectionImage(section.id, section.text, lang, section.alt);
-    }
-    // Update initial advice
-    updateAdviceOutput(dict, document.getElementById('askerType').value);
-    // Update charts
-    updateCharts(dict);
-    // Accessibility: aria-label for all main sections
-    document.getElementById('define').setAttribute('aria-label', dict.aria.sectionDefine);
-    document.getElementById('identify').setAttribute('aria-label', dict.aria.sectionIdentify);
-    document.getElementById('understand').setAttribute('aria-label', dict.aria.sectionUnderstand);
-    document.getElementById('act').setAttribute('aria-label', dict.aria.sectionAct);
-    document.getElementById('prevent').setAttribute('aria-label', dict.aria.sectionPrevent);
-    document.getElementById('personalize').setAttribute('aria-label', dict.aria.sectionPersonalize);
-    document.querySelector('footer').setAttribute('aria-label', dict.aria.sectionFooter);
-    document.querySelector('.flex.justify-center.gap-4.mb-12').setAttribute('aria-label', dict.aria.mainNav);
-    document.querySelector('.flex.flex-col.items-center').setAttribute('aria-label', dict.aria.personalizeForm);
-    // tabindex=0 לכל כרטיס מידע
-    document.querySelectorAll('.card').forEach(card => card.setAttribute('tabindex', '0'));
-    // Hide gender select and untranslated nav links for non-Hebrew
-    const genderDiv = document.getElementById('genderSelect')?.parentElement;
-    const linkGov = document.getElementById('link-gov');
-    const linkInfo = document.getElementById('link-info');
-    if (lang !== 'he') {
-      if (genderDiv) genderDiv.style.display = 'none';
-      if (linkGov) linkGov.style.display = 'none';
-      if (linkInfo) linkInfo.style.display = 'none';
-    } else {
-      if (genderDiv) genderDiv.style.display = '';
-      if (linkGov) linkGov.style.display = '';
-      if (linkInfo) linkInfo.style.display = '';
-    }
-  } catch (e) {
-    console.error('Language set error:', lang, e);
   }
+  window.currentDict = window.translations[lang].data;
+  window.currentLang = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+  updateUI();
+  updateStartGameBtnText();
+  if (fromUser) localStorage.setItem('lang', lang);
+  document.body.style.opacity = '1';
 }
 
-function updateLanguageUI(lang) {
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('selected', btn.dataset.lang === lang);
-  });
+// עדכון טקסט כפתור 'התחל משחק' לפי שפה
+function updateStartGameBtnText() {
+  const startGameBtn = document.getElementById('startGameBtn');
+  if (!startGameBtn) return;
+  // טקסטים לפי שפה
+  const texts = {
+    'he': 'התחל משחק',
+    'en': 'Start Game',
+    'fr': 'Commencer le jeu'
+  };
+  const lang = window.currentLang || 'he';
+  startGameBtn.textContent = texts[lang] || texts['he'];
 }
+
+// עדכון כל הטקסטים בדף (כולל כפתורים ו-anchors)
+function updateUI() {
+  const dict = window.currentDict;
+  if (!dict) return;
+  const lang = window.currentLang;
+
+  // עדכון כותרת ראשית ותת-כותרת
+  const mainTitle = document.getElementById('main-title');
+  const mainSubtitle = document.getElementById('main-subtitle');
+  if (mainTitle) mainTitle.textContent = dict.ui?.title || '';
+  if (mainSubtitle) mainSubtitle.textContent = dict.ui?.subtitle || '';
+
+  // עדכון כפתורי anchor והסתרתם לפי שפה
+  const linkGov = document.getElementById('link-gov');
+  const linkInfo = document.getElementById('link-info');
+  
+  if (linkGov) {
+    linkGov.textContent = dict.ui?.linkGov || 'מידע ממשלתי וקישורים';
+    linkGov.style.display = (lang === 'he') ? 'inline-block' : 'none';
+  }
+  if (linkInfo) {
+    linkInfo.textContent = dict.ui?.linkInfo || 'אינפוגרפיקה: התמודדות עם בריונות';
+    linkInfo.style.display = (lang === 'he') ? 'inline-block' : 'none';
+  }
+  
+  // עדכון כפתור משחק
+  updateStartGameBtnText();
+  
+  // עדכון שאר הסקשנים
+  updateDefineSection(dict);
+  updateIdentifySection(dict);
+  updateUnderstandSection(dict);
+  updateActSection(dict);
+  updatePreventSection(dict);
+  updatePersonalizeSection(dict);
+  updateFooterSection(dict);
+  updateCreditsBar(dict);
+  updateCharts(dict);
+}
+
+// =====================
+// Language Button Listeners
+// =====================
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      document.body.style.opacity = '0.5';
+      await setLanguage(btn.dataset.lang, true);
+    });
+  });
+});
+
+// =====================
+// שליטה על מודל המשחק בריונות
+// =====================
+window.addEventListener('DOMContentLoaded', async () => {
+  // קבע שפה ראשית מה-localStorage או מה-html
+  const savedLang = localStorage.getItem('lang') || document.documentElement.lang || 'he';
+  document.body.style.opacity = '0.5';
+  await setLanguage(savedLang);
+  document.body.style.opacity = '1';
+
+  const startGameBtn = document.getElementById('startGameBtn');
+  const gameModal = document.getElementById('gameModal');
+  const closeGameBtn = document.getElementById('closeGameBtn');
+
+  if (startGameBtn && gameModal && closeGameBtn) {
+    startGameBtn.addEventListener('click', () => {
+      // בדיקה: האם window.currentDict.game קיים?
+      if (!window.currentDict || !window.currentDict.game) {
+        alert('התרגום לא נטען, נסה להחליף שפה או לרענן את הדף');
+        return;
+      }
+      gameModal.classList.remove('hidden');
+      startGameBtn.style.display = 'none';
+      document.body.classList.add('overflow-hidden');
+      if (typeof startGame === 'function') {
+        startGame(window.currentLang);
+      }
+    });
+    closeGameBtn.addEventListener('click', () => {
+      gameModal.classList.add('hidden');
+      startGameBtn.style.display = 'inline-block';
+      document.body.classList.remove('overflow-hidden');
+      if (typeof closeGame === 'function') {
+        closeGame();
+      }
+    });
+  }
+});
 
 // =====================
 // Text-to-Speech (TTS) for Sections
@@ -792,64 +825,6 @@ function setupTTSSettingsButtons() {
 }
 // הפעל את הפונקציה הזו ב-load
 window.addEventListener('DOMContentLoaded', setupTTSSettingsButtons);
-
-// =====================
-// שליטה על מודל המשחק בריונות
-// =====================
-window.addEventListener('DOMContentLoaded', () => {
-  const gameLauncher = document.getElementById('game-launcher');
-  const startGameBtn = document.getElementById('startGameBtn');
-  const gameModal = document.getElementById('gameModal');
-  const closeGameBtn = document.getElementById('closeGameBtn');
-
-  if (startGameBtn && gameModal && closeGameBtn && gameLauncher) {
-    startGameBtn.addEventListener('click', () => {
-      gameModal.classList.remove('hidden');
-      gameLauncher.classList.add('hidden');
-      // הפעלת המשחק עם השפה הנוכחית
-      startGame(window.currentLang || 'he');
-    });
-    closeGameBtn.addEventListener('click', () => {
-      gameModal.classList.add('hidden');
-      gameLauncher.classList.remove('hidden');
-      closeGame();
-    });
-  }
-});
-
-// עדכון טקסט כפתור 'התחל משחק' לפי שפה
-function updateStartGameBtnText() {
-  const startGameBtn = document.getElementById('startGameBtn');
-  if (!startGameBtn) return;
-  // טקסטים לפי שפה
-  const texts = {
-    'he': 'התחל משחק',
-    'en': 'Start Game',
-    'fr': 'Commencer le jeu'
-  };
-  const lang = window.currentLang || 'he';
-  startGameBtn.textContent = texts[lang] || texts['he'];
-}
-
-// לעדכן את הכפתור בכל החלפת שפה
-const origSetLanguageForGame = setLanguage;
-setLanguage = async function(lang) {
-  await origSetLanguageForGame(lang);
-  updateStartGameBtnText();
-};
-
-// =====================
-// On Page Load
-// =====================
-const savedLang = localStorage.getItem('lang') || 'he';
-window.addEventListener('DOMContentLoaded', async () => {
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      await setLanguage(btn.dataset.lang);
-    });
-  });
-  await setLanguage(savedLang);
-});
 
 // =====================
 // Personalized Advice with Dynamic Image

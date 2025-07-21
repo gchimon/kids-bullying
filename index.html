@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="tts-player.css">
     <!-- Chosen Palette: Calm Harmony (Background: #FDFBF6, Text: #3C3C3C, Primary Accent: #7F9F80, Secondary Accent: #A7C4A8, Subtle Highlight: #D4E2D4) -->
     <!-- Application Structure Plan: The SPA is designed as a guided journey for parents, moving from awareness to action. 1) **Define**: Visually distinct cards explain the types of bullying. 2) **Identify**: An interactive section with tabs for "Victim" and "Bully" signs allows for focused self-assessment. 3) **Understand**: A donut chart visualizes the emotional impact. 4) **Act**: A clear, step-by-step flowchart provides an immediate action plan. 5) **Prevent**: A bar chart compares prevention strategies to empower long-term change. 6) **Personalize**: A Gemini API-powered section offers tailored advice for specific user scenarios, making the guide truly interactive and personal. 7) **Unite**: The conclusion emphasizes the community role. This structure organizes the dense report into a user-centric, actionable tool. -->
     <!-- Visualization & Content Choices: 
@@ -45,9 +47,16 @@
         <h1 class="header-title" id="main-title" tabindex="0">המדריך האינטראקטיבי להתמודדות עם בריונות</h1>
         <p class="subtitle text-lg text-gray-600" id="main-subtitle">כלים, זיהוי ופעולה להורים וילדים בגיל הרך</p>
     </header>
-    <div class="flex justify-center gap-4 mb-12">
-      <a href="gov_resources.html" class="bg-[#A7C4A8] text-[#3C3C3C] px-5 py-2 rounded-lg font-semibold hover:bg-[#7F9F80] transition" id="link-gov">מידע ממשלתי וקישורים</a>
-      <a href="info.html" class="bg-[#A7C4A8] text-[#3C3C3C] px-5 py-2 rounded-lg font-semibold hover:bg-[#7F9F80] transition" id="link-info">אינפוגרפיקה: התמודדות עם בריונות</a>
+
+    <!-- === אזור הכפתורים המאוחד === -->
+    <div class="flex flex-wrap justify-center items-center gap-4 mb-12">
+      <button id="startGameBtn"
+       class="bg-[#7F9F80] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#6a8b6b] transition duration-300 ease-in-out shadow-md">
+        התחל משחק
+      </button>
+      <a href="gov_resources.html" 
+      class="bg-[#7F9F80] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#6a8b6b] transition duration-300 ease-in-out shadow-md" id="link-gov">מידע ממשלתי וקישורים</a>
+      <a href="info.html" class="bg-[#7F9F80] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#6a8b6b] transition duration-300 ease-in-out shadow-md" id="link-info">אינפוגרפיקה: התמודדות עם בריונות</a>
     </div>
 
         <section id="define" class="mb-16 card" tabindex="0" aria-label="סוגי בריונות">
@@ -238,11 +247,6 @@
 
     </div>
     <!-- משחק בריונות - כפתור ומודל -->
-    <div id="game-launcher" class="flex justify-center my-8">
-      <button id="startGameBtn" class="bg-[#7F9F80] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#6a8b6b] transition duration-300 ease-in-out shadow-md">
-        התחל משחק
-      </button>
-    </div>
     <div id="gameModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
       <div class="relative">
         <button id="closeGameBtn" class="absolute top-2 right-2 text-2xl text-gray-700 hover:text-red-500" aria-label="סגור משחק">×</button>
@@ -250,10 +254,12 @@
       </div>
     </div>
     <!-- סוף משחק בריונות -->
+
+
     <!-- ודא שטוען config.js לפני script.js -->
     <script src="config.js"></script>
-    <link rel="stylesheet" href="tts-player.css">
     <script src="tts-player.js"></script>
+    <script src="game.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

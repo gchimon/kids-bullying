@@ -8,7 +8,9 @@
     "child": "Child",
     "teacher": "Teacher",
     "counselor": "Counselor",
-    "advicePlaceholder": "For example: 'My 6-year-old son came home sad and said his friend doesn't want to play with him anymore and calls him names at recess. What should I do?'"
+    "advicePlaceholder": "For example: 'My 6-year-old son came home sad and said his friend doesn't want to play with him anymore and calls him names at recess. What should I do?'",
+    "linkGov": "Government Info",
+    "linkInfo": "Infographics"
   },
   "keywords": [
     { "en": ["bullying", "violence"], "result": "bullying children" },
