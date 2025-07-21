@@ -237,7 +237,19 @@
         </div>
 
     </div>
-
+    <!-- משחק בריונות - כפתור ומודל -->
+    <div id="game-launcher" class="flex justify-center my-8">
+      <button id="startGameBtn" class="bg-[#7F9F80] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#6a8b6b] transition duration-300 ease-in-out shadow-md">
+        התחל משחק
+      </button>
+    </div>
+    <div id="gameModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+      <div class="relative">
+        <button id="closeGameBtn" class="absolute top-2 right-2 text-2xl text-gray-700 hover:text-red-500" aria-label="סגור משחק">×</button>
+        <canvas id="gameCanvas" width="800" height="600" class="rounded-lg shadow-lg"></canvas>
+      </div>
+    </div>
+    <!-- סוף משחק בריונות -->
     <!-- ודא שטוען config.js לפני script.js -->
     <script src="config.js"></script>
     <link rel="stylesheet" href="tts-player.css">

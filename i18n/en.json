@@ -191,5 +191,76 @@
     "sectionPrevent": "Bullying Prevention",
     "sectionPersonalize": "Personalized Advice",
     "sectionFooter": "United Front Against Bullying"
+  },
+  "game": {
+    "title": "Friendship Heroes",
+    "select_language": "Select Language:",
+    "choose_color": "Choose your character's color:",
+    "start_game": "Start Game",
+    "confirm_button": "Confirm",
+    "good_job": "Great job, hero!",
+    "try_again": "Try again!",
+    "continue_button": "Continue",
+    "end_game_message": "Well done! You completed the game and became a friendship hero!",
+    "score_label": "Score: ",
+    "scenes": [
+      {
+        "background": "lightblue",
+        "text": "Yossi took my ball without asking!",
+        "character1": { "x": 100, "y": 350, "color": "purple", "name": "Child 1" },
+        "character2": { "x": 300, "y": 350, "color": "orange", "name": "Child 2" },
+        "options": [
+          { "text": "Go to an adult and tell them", "action": "good", "explanation": "Excellent! An adult can help resolve the situation safely." },
+          { "text": "Take the ball back by force", "action": "bad", "explanation": "Not recommended. This could make the situation worse." },
+          { "text": "Do nothing", "action": "bad", "explanation": "It's important not to be indifferent. It's good to try and help." }
+        ]
+      },
+      {
+        "background": "lightgreen",
+        "text": "Eli isn't sharing his sandbox game with Dana.",
+        "character1": { "x": 150, "y": 350, "color": "brown", "name": "Child 1" },
+        "character2": { "x": 400, "y": 350, "color": "pink", "name": "Child 2" },
+        "options": [
+          { "text": "Suggest Eli and Dana play together", "action": "good", "explanation": "Great! It's always fun to play together and cooperate." },
+          { "text": "Tell Dana to find another friend", "action": "bad", "explanation": "That's not nice, everyone deserves to play." },
+          { "text": "Laugh at Dana", "action": "bad", "explanation": "Laughing at someone is not nice and hurts." }
+        ]
+      },
+      {
+        "background": "#ADD8E6",
+        "text": "My friends are laughing at a new kid in class because he wears glasses.",
+        "character1": { "x": 200, "y": 350, "color": "gray", "name": "New Kid" },
+        "character2": { "x": 450, "y": 350, "color": "red", "name": "Bully" },
+        "options": [
+          { "text": "Go to friends and tell them it's not nice", "action": "good", "explanation": "Brave! Defending others is a true hero's trait." },
+          { "text": "Join in laughing so they don't laugh at me", "action": "bad", "explanation": "Incorrect. When we join in bullying, we actually empower it." },
+          { "text": "Go and tell the teacher", "action": "good", "explanation": "Excellent choice! A teacher can help handle the situation and teach everyone about respect." }
+        ]
+      },
+      {
+        "background": "#F9E79F",
+        "text": "During recess, a group of kids is whispering and looking at another child. One of them suggests not letting that child join the group game.",
+        "character1": { "x": 120, "y": 350, "color": "blue", "name": "Child" },
+        "character2": { "x": 350, "y": 350, "color": "green", "name": "Group of Kids" },
+        "options": [
+          { "text": "Invite the child to join the game", "action": "good", "explanation": "Great! Everyone should feel included." },
+          { "text": "Ignore and keep playing", "action": "neutral", "explanation": "Sometimes it's hard to step in, but it's important to notice kids who feel left out." },
+          { "text": "Tell the kids it's not okay to exclude others", "action": "good", "explanation": "Well done! You helped the child feel part of the group." },
+          { "text": "Join the group and tell the child to play somewhere else", "action": "bad", "explanation": "Excluding someone is very hurtful. Try to be sensitive." }
+        ]
+      },
+      {
+        "background": "#F5B7B1",
+        "text": "In class, a child forgets their pencil case at home and asks for help. Some kids laugh at them.",
+        "character1": { "x": 180, "y": 350, "color": "yellow", "name": "Child" },
+        "character2": { "x": 400, "y": 350, "color": "purple", "name": "Group of Kids" },
+        "options": [
+          { "text": "Offer to help and lend a pencil", "action": "good", "explanation": "Friendly act! A small help can make a big difference." },
+          { "text": "Join in the laughter", "action": "bad", "explanation": "Laughing at someone in distress is very hurtful." },
+          { "text": "Ignore", "action": "neutral", "explanation": "Sometimes we don't know what to do, but a small help can make someone happy." },
+          { "text": "Tell the teacher", "action": "good", "explanation": "The teacher can help and teach everyone about mutual help." }
+        ]
+      }
+    ]
   }
 } 

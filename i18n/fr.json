@@ -191,5 +191,76 @@
     "sectionPrevent": "Prévention de l'intimidation",
     "sectionPersonalize": "Conseil personnalisé",
     "sectionFooter": "Front uni contre l'intimidation"
+  },
+  "game": {
+    "title": "Héros de l'Amitié",
+    "select_language": "Sélectionner la langue :",
+    "choose_color": "Choisissez la couleur de votre personnage :",
+    "start_game": "Commencer le jeu",
+    "confirm_button": "Confirmer",
+    "good_job": "Excellent travail, héros !",
+    "try_again": "Essayez à nouveau !",
+    "continue_button": "Continuer",
+    "end_game_message": "Bravo ! Vous avez terminé le jeu et êtes devenu un héros de l'amitié !",
+    "score_label": "Score : ",
+    "scenes": [
+      {
+        "background": "lightblue",
+        "text": "Yossi m'a pris mon ballon sans demander !",
+        "character1": { "x": 100, "y": 350, "color": "purple", "name": "Enfant 1" },
+        "character2": { "x": 300, "y": 350, "color": "orange", "name": "Enfant 2" },
+        "options": [
+          { "text": "Aller voir un adulte et le dire", "action": "good", "explanation": "Excellent ! Un adulte peut aider à résoudre la situation en toute sécurité." },
+          { "text": "Reprendre le ballon par la force", "action": "bad", "explanation": "Déconseillé. Cela pourrait aggraver la situation." },
+          { "text": "Ne rien faire", "action": "bad", "explanation": "Il est important de ne pas être indifférent. Il est bon d'essayer d'aider." }
+        ]
+      },
+      {
+        "background": "lightgreen",
+        "text": "Eli ne partage pas son jeu de sable avec Dana.",
+        "character1": { "x": 150, "y": 350, "color": "brown", "name": "Enfant 1" },
+        "character2": { "x": 400, "y": 350, "color": "pink", "name": "Enfant 2" },
+        "options": [
+          { "text": "Suggérer à Eli et Dana de jouer ensemble", "action": "good", "explanation": "Super ! C'est toujours amusant de jouer ensemble et de coopérer." },
+          { "text": "Dire à Dana de trouver un autre ami", "action": "bad", "explanation": "Ce n'est pas gentil, tout le monde a le droit de jouer." },
+          { "text": "Se moquer de Dana", "action": "bad", "explanation": "Se moquer de quelqu'un n'est pas gentil et blesse." }
+        ]
+      },
+      {
+        "background": "#ADD8E6",
+        "text": "Mes amis se moquent d'un nouvel élève parce qu'il porte des lunettes.",
+        "character1": { "x": 200, "y": 350, "color": "gray", "name": "Nouvel élève" },
+        "character2": { "x": 450, "y": 350, "color": "red", "name": "Harcèleur" },
+        "options": [
+          { "text": "Aller voir les amis et leur dire que ce n'est pas gentil", "action": "good", "explanation": "Courageux ! Défendre les autres est un trait de vrai héros." },
+          { "text": "Participer aux moqueries pour qu'ils ne se moquent pas de moi", "action": "bad", "explanation": "Incorrect. Lorsque nous participons à l'intimidation, nous la renforçons." },
+          { "text": "Aller en parler à l'enseignant", "action": "good", "explanation": "Excellent choix ! Un enseignant peut aider à gérer la situation et à enseigner le respect à tous." }
+        ]
+      },
+      {
+        "background": "#F9E79F",
+        "text": "Pendant la récréation, un groupe d'enfants chuchote en regardant un autre enfant. L'un d'eux propose de ne pas l'inclure dans le jeu de groupe.",
+        "character1": { "x": 120, "y": 350, "color": "blue", "name": "Enfant" },
+        "character2": { "x": 350, "y": 350, "color": "green", "name": "Groupe d'enfants" },
+        "options": [
+          { "text": "Inviter l'enfant à rejoindre le jeu", "action": "good", "explanation": "Super ! Chacun doit se sentir inclus." },
+          { "text": "Ignorer et continuer à jouer", "action": "neutral", "explanation": "Parfois, il est difficile d'intervenir, mais il est important de remarquer les enfants qui se sentent exclus." },
+          { "text": "Dire aux enfants que ce n'est pas bien d'exclure quelqu'un", "action": "good", "explanation": "Bravo ! Tu as aidé l'enfant à se sentir intégré au groupe." },
+          { "text": "Rejoindre le groupe et dire à l'enfant d'aller jouer ailleurs", "action": "bad", "explanation": "Exclure quelqu'un fait beaucoup de mal. Essaie d'être plus sensible." }
+        ]
+      },
+      {
+        "background": "#F5B7B1",
+        "text": "En classe, un enfant oublie sa trousse à la maison et demande de l'aide. Certains enfants se moquent de lui/d'elle.",
+        "character1": { "x": 180, "y": 350, "color": "yellow", "name": "Enfant" },
+        "character2": { "x": 400, "y": 350, "color": "purple", "name": "Groupe d'enfants" },
+        "options": [
+          { "text": "Proposer d'aider et prêter un crayon", "action": "good", "explanation": "Geste amical ! Un petit coup de main peut faire une grande différence." },
+          { "text": "Se joindre aux moqueries", "action": "bad", "explanation": "Se moquer de quelqu'un en difficulté lui fait beaucoup de mal." },
+          { "text": "Ignorer", "action": "neutral", "explanation": "Parfois, on ne sait pas quoi faire, mais un petit geste peut rendre quelqu'un heureux." },
+          { "text": "Le dire à l'enseignant(e)", "action": "good", "explanation": "L'enseignant(e) peut aider et apprendre à tous l'entraide." }
+        ]
+      }
+    ]
   }
 } 

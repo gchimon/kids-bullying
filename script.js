@@ -794,6 +794,51 @@ function setupTTSSettingsButtons() {
 window.addEventListener('DOMContentLoaded', setupTTSSettingsButtons);
 
 // =====================
+// שליטה על מודל המשחק בריונות
+// =====================
+window.addEventListener('DOMContentLoaded', () => {
+  const gameLauncher = document.getElementById('game-launcher');
+  const startGameBtn = document.getElementById('startGameBtn');
+  const gameModal = document.getElementById('gameModal');
+  const closeGameBtn = document.getElementById('closeGameBtn');
+
+  if (startGameBtn && gameModal && closeGameBtn && gameLauncher) {
+    startGameBtn.addEventListener('click', () => {
+      gameModal.classList.remove('hidden');
+      gameLauncher.classList.add('hidden');
+      // הפעלת המשחק עם השפה הנוכחית
+      startGame(window.currentLang || 'he');
+    });
+    closeGameBtn.addEventListener('click', () => {
+      gameModal.classList.add('hidden');
+      gameLauncher.classList.remove('hidden');
+      closeGame();
+    });
+  }
+});
+
+// עדכון טקסט כפתור 'התחל משחק' לפי שפה
+function updateStartGameBtnText() {
+  const startGameBtn = document.getElementById('startGameBtn');
+  if (!startGameBtn) return;
+  // טקסטים לפי שפה
+  const texts = {
+    'he': 'התחל משחק',
+    'en': 'Start Game',
+    'fr': 'Commencer le jeu'
+  };
+  const lang = window.currentLang || 'he';
+  startGameBtn.textContent = texts[lang] || texts['he'];
+}
+
+// לעדכן את הכפתור בכל החלפת שפה
+const origSetLanguageForGame = setLanguage;
+setLanguage = async function(lang) {
+  await origSetLanguageForGame(lang);
+  updateStartGameBtnText();
+};
+
+// =====================
 // On Page Load
 // =====================
 const savedLang = localStorage.getItem('lang') || 'he';
